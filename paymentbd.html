@@ -135,30 +135,26 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
 
   <script>
-    // Firebase config (Replace these values with your own Firebase project's config)
     const firebaseConfig = {
       apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
-  authDomain: "fir-bot-bd5e8.firebaseapp.com",
-  databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
-  projectId: "fir-bot-bd5e8",
-  storageBucket: "fir-bot-bd5e8.firebasestorage.app",
-  messagingSenderId: "501448994050",
-  appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
-  measurementId: "G-3ERPTBHN6N"
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Method অনুযায়ী নাম্বার লিস্ট  
     const numberMap = {  
       bKash: "01318645435",  
       Nagad: "01855966005",  
       Rocket: "01829261192"  
     };  
 
-    // LocalStorage থেকে method ও amount নেওয়া  
     const method = localStorage.getItem("depositMethod");  
     const amount = localStorage.getItem("depositAmount");  
 
@@ -169,7 +165,6 @@
       document.getElementById("agentNumber").innerText = number;  
     }  
 
-    // Copy function  
     function copyText(id) {  
       const el = document.getElementById(id);  
       const temp = document.createElement("textarea");  
@@ -180,37 +175,30 @@
       document.body.removeChild(temp);  
     }  
 
-    // Transaction Submit with Firebase and redirect  
     function submitTransaction() {  
       const trxid = document.getElementById("trxid").value;  
-      if (!trxid) {  
-        alert("Please enter Transaction ID");  
+      if (!trxid || trxid.length < 6) {  
+        alert("Please enter a valid Transaction ID");  
         return;  
       }  
 
-      const userId = localStorage.getItem("userUID") || "anonymous";
-      const paymentData = {
-        method: method,
-        amount: amount,
-        trxid: trxid,
-        timestamp: new Date().toISOString()
-      };
-      // paymentbd.html এর সাবমিশনে
-const deposit = {
-  method: "Bkash", 
-  amount: "1000 BDT", 
-  trxId: "TX987654", 
-  time: new Date().toISOString()
-};
-localStorage.setItem("depositData", JSON.stringify(deposit));
+      const userId = localStorage.getItem("userUID") || "anonymous";  
+      const paymentData = {  
+        method: method,  
+        amount: amount,  
+        trxid: trxid,  
+        timestamp: new Date().toISOString()  
+      };  
 
-      db.ref("deposits/" + userId).push(paymentData)
-        .then(() => {
-          window.location.href = "veryfidp.html";
-        })
-        .catch((error) => {
-          alert("Error saving to database: " + error.message);
-        });
+      localStorage.setItem("depositData", JSON.stringify(paymentData));  
+
+      db.ref("deposits/" + userId).push(paymentData)  
+        .then(() => {  
+          window.location.href = "veryfidp.html";  
+        })  
+        .catch((error) => {  
+          alert("Error saving to database: " + error.message);  
+        });  
     }  
 
     window.copyText = copyText;  
