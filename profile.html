@@ -1,198 +1,261 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
     body {
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: #333;
-    }
-    .container {
-      max-width: 400px;
-      margin: 20px auto;
-      background: #ffffff;
-      border-radius: 25px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      padding: 25px;
-    }
-    .profile {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .profile img {
-      width: 70px;
-      border-radius: 50%;
-      margin-right: 15px;
-    }
-    .balance {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #f1f8e9;
-      padding: 15px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-    }
-    .balance span {
-      font-weight: bold;
-      color: green;
-    }
-    .btn-group {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-    .btn-group button {
-      flex: 1;
-      margin: 0 5px;
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
+      background: linear-gradient(to bottom, #000, #333);
       color: #fff;
-      cursor: pointer;
+      padding-bottom: 80px;
     }
-    .btn-deposit { background: #43a047; }
-    .btn-withdraw { background: #1e88e5; }
-    .info-box {
-      background: #e3f2fd;
-      padding: 15px;
-      border-radius: 15px;
-      margin-bottom: 20px;
+    .header {
+      background: linear-gradient(to bottom, #222, #444);
+      padding: 20px;
       text-align: center;
+      font-size: 20px;
+      font-weight: bold;
     }
-    .info-box div {
-      margin: 5px 0;
-    }
-    .menu {
-      margin-bottom: 20px;
-    }
-    .menu button {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 14px;
-      background: #f5f5f5;
-      border: none;
-      border-radius: 12px;
-      margin-bottom: 10px;
+    .announcement {
+      padding: 15px;
+      background: #111;
+      color: #ffcc00;
+      text-align: center;
       font-size: 16px;
+      border-bottom: 1px solid #444;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      background: #1a1a1a;
+      padding: 15px 0;
+    }
+    .action-item {
+      text-align: center;
+      color: white;
       cursor: pointer;
     }
-    .menu button i {
-      margin-right: 10px;
+    .action-item i {
+      font-size: 28px;
+      color: #ffcc00;
     }
-    .logout {
-      width: 100%;
-      padding: 14px;
-      background: #d32f2f;
-      color: #fff;
+    .vip-card {
+      background: #222;
+      margin: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #444;
+    }
+    .vip-card img {
+      width: 70px;
+    }
+    .vip-info {
+      flex: 1;
+    }
+    .vip-info h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .vip-info p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .vip-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 8px 15px;
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 5px;
+      background: #ffcc00;
+      color: black;
       font-weight: bold;
       cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #111;
+      padding: 10px 0;
+    }
+    .bottom-nav .nav-item {
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .bottom-nav .nav-item i {
+      font-size: 24px;
+      color: #ffcc00;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="profile">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Icon">
-      <div>
-        <div><strong id="uid">UID</strong></div>
-        <div id="email">Email</div>
+  <div class="announcement">
+    <i class="material-icons">notifications</i> This Is Your Next Level Earning Platfrom By InvestSure 
+  </div>  <div class="actions">
+    <div class="action-item" onclick="location.href='deposit.html'">
+      <i class="material-icons">arrow_upward</i>
+      <div>Deposit</div>
+    </div>
+    <div class="action-item" onclick="location.href='withdraw.html'">
+      <i class="material-icons">arrow_downward</i>
+      <div>Withdraw</div>
+    </div>
+    <div class="action-item" onclick="location.href='team.html'">
+      <i class="material-icons">groups</i>
+      <div>My Team</div>
+    </div>
+    <div class="action-item" onclick="location.href='exchange.html'">
+      <i class="material-icons">swap_horiz</i>
+      <div>Exchange</div>
+    </div>
+  </div>  <!-- VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 1 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong>285</strong> টাকা | মোট <strong>1,995 </strong>টাকা |
+মাত্র <strong>800</strong> টাকায় <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
       </div>
-    </div><div class="balance">
-  <div><strong>Balance</strong></div>
-  <div><span id="balance">BDT 100</span></div>
-</div>
-
-<div class="btn-group">
-  <button class="btn-deposit" onclick="window.location.href='deposit.html'">Deposit</button>
-  <button class="btn-withdraw" onclick="window.location.href='withdraw.html'">Withdraw</button>
-</div>
-
-<div class="info-box">
-  <div>Total Member of My Team: <strong id="team-count">0</strong></div>
-  <div>Total Earning: <strong>BDT 0</strong></div>
-  <div>Total Deposit: <strong>BDT 0</strong></div>
-  <div>Plan Name: <strong>None</strong></div>
-</div>
-
-<div class="menu">
-  <button onclick="window.location.href='deposit.html'"><i class="material-icons">attach_money</i> Deposit Balance</button>
-  <button onclick="window.location.href='withdraw.html'"><i class="material-icons">money_off</i> Withdraw Balance</button>
-  <button onclick="window.location.href='team.html'"><i class="material-icons">group</i> My Team</button>
-  <button onclick="window.location.href='dphistory.html'"><i class="material-icons">history</i> Deposit History</button>
-  <button><i class="material-icons">support_agent</i> Support Service</button>
-</div>
-
-<button class="logout" id="logoutBtn">LOGOUT</button>
-
-  </div>  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
-      authDomain: "fir-bot-bd5e8.firebaseapp.com",
-      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
-      projectId: "fir-bot-bd5e8",
-      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
-      messagingSenderId: "501448994050",
-      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
-      measurementId: "G-3ERPTBHN6N"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth();
-
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      signOut(auth).then(() => {
-        window.location.href = 'index.html';
-      }).catch(error => {
-        alert('Logout failed: ' + error.message);
-      });
-    });
-
-    function generatePremiumUID(uid) {
-      return uid.slice(0, 5).toUpperCase();
-    }
-
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        const uid = user.uid;
-        document.getElementById('uid').textContent = `UID: ${generatePremiumUID(uid)}`;
-        document.getElementById('email').textContent = user.email;
-
-        const balanceRef = ref(db, `users/${uid}/balance`);
-        const teamRef = ref(db, `users/${uid}/teamCount`);
-
-        onValue(balanceRef, snapshot => {
-          const balance = snapshot.val();
-          document.getElementById('balance').textContent = `BDT 100.00`;
-        });
-
-        onValue(teamRef, snapshot => {
-          const teamCount = snapshot.val();
-          document.getElementById('team-count').textContent = teamCount;
-        });
-      } else {
-        window.location.href = 'login.html';
-      }
-    });
-  </script></body>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <!-- Duplicate VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 2 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong>400</strong> টাকা | মোট<strong> 2,800 </strong>টাকা |
+      মাত্র<strong> 1400</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+  
+    <div class="vip-info">
+      <h3>VIP 3 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong> 571  </strong>টাকা | মোট <strong> 4,000 </strong> টাকা | মাত্র <strong>1900 </strong>টাকায় |  <strong>7</strong>  দিনের প্ল্যান সক্রিয় করুন।</h4>
+      </p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 4 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong> 1,000  </strong>টাকা | মোট <strong> 7,000 </strong> টাকা | মাত্র <strong>3400 </strong>টাকায় |  <strong>7</strong>  দিনের প্ল্যান সক্রিয় করুন।</h4>
+      </p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    
+    
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+    
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 5 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>1,500</strong> টাকা | মোট <strong>10,500</strong> টাকা | মাত্র <strong>5000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 6 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>2,000</strong> টাকা | মোট <strong>14,000</strong> টাকা | মাত্র <strong>6800</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 7 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>2,800</strong> টাকা | মোট <strong>19,600</strong> টাকা | মাত্র <strong>9500</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 8 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>3,500</strong> টাকা | মোট <strong>24,500</strong> টাকা | মাত্র <strong>11,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 9 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>4,200</strong> টাকা | মোট <strong>29,400</strong> টাকা | মাত্র <strong>13,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 10 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>5,000</strong> টাকা | মোট <strong>35,000</strong> টাকা | মাত্র <strong>15,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+    <div class="bottom-nav">
+  
+    <div class="nav-item" onclick="location.href='dashboard.html'">
+    
+      <i class="material-icons">home</i>
+      <div>Home</div>
+    </div>
+    <div class="nav-item" onclick="location.href='chat.html'">
+      <i class="material-icons">chat</i>
+      <div>Chat</div>
+    </div>
+    <div class="nav-item" onclick="location.href='profile.html'">
+      <i class="material-icons">person</i>
+      <div>Profile</div>
+    </div>
+  </div>
+</body>
 </html>
