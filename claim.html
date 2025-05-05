@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Package Not Activated</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #2b2e4a, #1e202c, #0f0c29);
+      color: #fff;
+    }
+
+    .card-glass {
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-10">
+
+  <div class="card-glass max-w-md w-full rounded-2xl p-6 text-center space-y-6">
+    
+    <div class="flex justify-center">
+      <img src="https://assets.onecompiler.app/43ea4pg72/43emcw2qs/Animation%20-%201744469839327.gif" alt="Warning" class="w-40 h-40 rounded-xl shadow-lg border border-white/20" />
+    </div>
+
+    <div class="text-2xl font-bold text-rose-300 flex items-center justify-center gap-2">
+      <span class="material-icons-outlined text-rose-400 text-3xl">lock_outline</span>
+      Attention
+    </div>
+
+    <p class="text-sm text-gray-200 leading-relaxed px-3">
+      You have not activated this <span class="text-rose-400 font-medium">current package</span>.<br>
+      You can <span class="text-amber-300 font-medium">claim</span> it after purchasing.<br>
+      Please complete your purchase to unlock full access.
+    </p>
+
+    <a href="purchase.html">
+      <button class="bg-rose-500 hover:bg-rose-600 text-white font-semibold py-2 px-6 rounded-full shadow-lg transition-all duration-300">
+        Go To Purchase
+      </button>
+    </a>
+
+  </div>
+
+</body>
+</html>

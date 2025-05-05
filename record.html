@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বন্ধুদের আমন্ত্রণ জানান</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f9f9f9;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(to right, #8e44ad, #3498db);
+            color: white;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header i {
+            cursor: pointer;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .tabs {
+            display: flex;
+            background: #fff;
+            justify-content: space-around;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tab.active {
+            color: #3498db;
+            border-color: #3498db;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-around;
+            padding: 16px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+        .select-box, .date-box {
+            border: 1px solid #3498db;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 14px;
+            color: #3498db;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            background: #e9ecef;
+            padding: 10px 16px;
+            font-weight: bold;
+        }
+        .no-data {
+            text-align: center;
+            padding: 60px 16px;
+        }
+        .no-data img {
+            width: 100px;
+            margin-bottom: 16px;
+        }
+        .footer-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="material-icons-outlined" onclick="location.href='dashboard.html'">arrow_back</i>
+        <div class="header-title">বন্ধুদের আমন্ত্রণ জানান</div>
+        <span></span>
+    </div><div class="tabs">
+    <div class="tab" onclick="location.href='team.html'"><i class="material-icons-outlined">groups</i> সংক্ষিপ্ত বর্ণনা</div>
+    <div class="tab" onclick="location.href='win.html'"><i class="material-icons-outlined">emoji_events</i> পুরস্কার</div>
+    <div class="tab" onclick="location.href='aii.html'"><i class="material-icons-outlined">account_balance_wallet</i> আয়</div>
+    <div class="tab active" onclick="location.href='record.html'"><i class="material-icons-outlined">history</i> রেকর্ডস</div>
+</div>
+
+<div class="controls">
+    <div class="select-box">
+        <i class="material-icons-outlined">card_giftcard</i> আমন্ত্রণ পুরস্কার
+    </div>
+    <div class="date-box">
+        <i class="material-icons-outlined">calendar_today</i>
+        <span id="dateRange">লোড হচ্ছে...</span>
+    </div>
+</div>
+
+<div class="table-header">
+    <div>নিবন্ধনের তারিখ</div>
+    <div>ব্যবহারকারীর নাম</div>
+    <div>পরিমাণ</div>
+</div>
+
+<div class="no-data">
+    <img src="https://assets.onecompiler.app/43ea4pg72/43encd9ky/no-data.gif" alt="no data">
+    <div style="color:#3498db; font-size:18px; font-weight:500;">কোন ডেটা নেই</div>
+</div>
+
+<div class="footer-bar">
+    <div>মোট</div>
+    <div>0.00</div>
+</div>
+
+<script>
+    const today = new Date();
+    const formattedDate = today.toISOString().slice(5, 10).replace('-', '/');
+    document.getElementById('dateRange').innerText = `${formattedDate} - ${formattedDate}`;
+</script>
+
+</body>
+</html>

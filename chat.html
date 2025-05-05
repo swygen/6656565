@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>AI সহকারী - InvestSure BD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Material+Symbols+Rounded" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #f0f4ff, #e9f0ff, #ffffff);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .chat-header {
+      background: linear-gradient(to right, #0052cc, #007bff);
+      color: white;
+      padding: 22px;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 1;
+      font-size: 26px;
+    }
+
+    .chat-body {
+      padding: 20px;
+      background: #f8fbff;
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .chat-bubble {
+      padding: 14px 18px;
+      border-radius: 18px;
+      max-width: 85%;
+      font-size: 15px;
+      line-height: 1.6;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      word-wrap: break-word;
+      transition: all 0.3s ease;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: #e4f1ff;
+      border-left: 4px solid #007bff;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #d4ffe2;
+      border-right: 4px solid #27ae60;
+    }
+
+    .chat-footer {
+      padding: 18px;
+      background: #ffffff;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .start-btn {
+      background: linear-gradient(to right, #007bff, #0052cc);
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .start-btn:hover {
+      background: #0064e0;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background: #f1faff;
+      transform: scale(1.015);
+    }
+
+    .option .material-symbols-rounded {
+      color: #007bff;
+      font-size: 20px;
+    }
+
+    @media(max-width: 480px) {
+      .chat-container {
+        border-radius: 0;
+        height: 100vh;
+      }
+      .chat-body {
+        padding: 16px;
+      }
+      .chat-footer {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <span class="material-symbols-rounded">smart_toy</span> InvestSure BD AI সহকারী
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-bubble bot">
+      স্বাগতম! সাহায্য পেতে নিচে Start Bot চাপুন।
+    </div>
+  </div>
+  <div class="chat-footer" id="chatFooter">
+    <button class="start-btn" onclick="startBot()">Start Bot</button>
+  </div>
+</div>
+
+<script>
+  const chatBody = document.getElementById('chatBody');
+  const chatFooter = document.getElementById('chatFooter');
+
+  const options = [
+    {
+      text: "১. পেমেন্ট সংক্রান্ত সমস্যা",
+      icon: "credit_card",
+      reply: `পেমেন্ট সংক্রান্ত তথ্য:
+আপনার প্রদানকৃত মোবাইল নাম্বারটি ভুল হতে পারে অথবা আমাদের সার্ভার এই মুহূর্তে ব্যস্ত থাকায় কিছুটা সময় নিচ্ছে।
+
+যদি ভুল নাম্বার দিয়ে থাকেন, তাহলে দুঃখজনকভাবে আপনি পেমেন্টের সুবিধা গ্রহণ করতে পারবেন না।
+আর যদি সঠিক নাম্বার দিয়ে থাকেন, তাহলে অনুগ্রহ করে ধৈর্য ধরুন—প্রক্রিয়াটি সম্পন্ন হতে ১০-২০ মিনিট থেকে সর্বোচ্চ ২৪ ঘণ্টা পর্যন্ত সময় লাগতে পারে।
+
+আমরা সর্বোচ্চ প্রচেষ্টা করছি যেন আপনি দ্রুত ও নিরাপদভাবে সেবা গ্রহণ করতে পারেন।
+আপনার সহযোগিতা ও ধৈর্যের জন্য আন্তরিক ধন্যবাদ।`
+    },
+    {
+      text: "২. ডিপোজিট সংক্রান্ত সমস্যা",
+      icon: "account_balance",
+      reply: `ডিপোজিট সমস্যার সম্ভাব্য কারণ ও করণীয় নির্দেশনা
+
+আপনার জমাকৃত ট্রানজেকশন আইডি যদি ভুল হয়ে থাকে, তাহলে স্বাভাবিকভাবেই ব্যালেন্স অ্যাড হবে না। আবার অনেক সময় সার্ভার ব্যস্ত থাকার কারণে কিছুটা বিলম্বও হতে পারে।
+
+যদি আপনি সঠিক ট্রানজেকশন আইডি প্রদান করে থাকেন, তাহলে অনুগ্রহ করে একটু ধৈর্য ধরুন—সিস্টেম সেটি যাচাই করে ব্যালেন্স অ্যাড করতে ১০-২০ মিনিট থেকে শুরু করে ২৪ ঘণ্টা পর্যন্ত সময় নিতে পারে।
+
+তাই অনুরোধ রইলো:
+
+ইনপুটকৃত তথ্য যেন একেবারে সঠিক হয়, সেটি নিশ্চিত করুন।
+
+একাধিকবার ভুল ইনপুট দিলে সেটি সিস্টেম দ্বারা বাতিল হয়ে যেতে পারে।
+
+ধৈর্য ধরে কিছুক্ষণ অপেক্ষা করুন—বেশিরভাগ ক্ষেত্রেই সমস্যা নিজে থেকেই সমাধান হয়ে যায়।
+
+আপনার সহযোগিতায় আমরা কৃতজ্ঞ। ধন্যবাদ!`
+    },
+    {
+      text: "৩. রেফার সংক্রান্ত সমস্যা",
+      icon: "group",
+      reply: `রেফারাল বোনাস পেতে যা করতে হবে
+
+আপনি যদি রেফারাল বোনাস পেতে চান, তাহলে সঠিক রেফার কোড ব্যবহার করা আবশ্যক। ভুল রেফার কোড ইনপুট করলে আপনি বোনাসের আওতায় পড়বেন না।
+
+এছাড়াও মনে রাখবেন—শুধুমাত্র রেফার করা অ্যাকাউন্ট তৈরি করলেই বোনাস দেয়া হয় না।
+আপনার রেফার করা অ্যাকাউন্ট থেকে অবশ্যই একটি বৈধ ডিপোজিট সম্পন্ন করতে হবে।
+
+তাই বোনাস পেতে হলে:
+
+সঠিক রেফার কোডটি ব্যবহার করুন
+
+রেফার করা ইউজার যেন টাকা ডিপোজিট করে, তা নিশ্চিত করুন
+
+রেফারাল বোনাস সিস্টেমটি স্বয়ংক্রিয়, তাই নিয়ম পূরণ না হলে বোনাস প্রক্রিয়া সম্পন্ন হবে না।
+
+যেকোনো সাহায্যের জন্য যোগাযোগ করুন:
+Email: info@support.com
+
+আপনার সচেতনতা এবং সহযোগিতার জন্য ধন্যবাদ।`
+    },
+    {
+      text: "৪. প্রাইভেসি পলিসি নীতি",
+      icon: "shield",
+      reply: `InvestSure BD – আমাদের প্রাইভেসি পলিসি ও লাভ নিশ্চিত করার নীতি
+
+আমাদের মূল লক্ষ্য হচ্ছে—আপনার ডিপোজিটকৃত ব্যালেন্সকে নিরাপদ ও সম্ভাবনাময় প্রজেক্টগুলোর মাধ্যমে বৃদ্ধি করা, যাতে আপনি নিশ্চিতভাবে লাভ অর্জন করতে পারেন।
+
+আমরা প্রতিটি প্রজেক্ট বাছাই করি পুঙ্খানুপুঙ্খ বিশ্লেষণ ও অভিজ্ঞতার ভিত্তিতে, যাতে আপনার বিনিয়োগ থাকে সুরক্ষিত এবং লাভজনক।
+
+আপনার লাভ নিশ্চিত করতে যা করবেন:
+
+✅ যাচাইকৃত ও লাভজনক প্রজেক্ট ক্রয় করুন
+✅ বেশি বেশি রেফার করুন এবং
+✅ রেফার করা একাউন্ট থেকে বৈধ ডিপোজিট নিশ্চিত করুন
+
+আমরা প্রতিশ্রুতিবদ্ধ—আপনার আস্থা ও বিনিয়োগের সুরক্ষা দিতে।
+আপনার সচেতন সিদ্ধান্তই আপনাকে নিয়ে যাবে আর্থিক সাফল্যের পথে।
+
+ধন্যবাদান্তে,
+InvestSure BD`
+    }
+  ];
+
+  function startBot() {
+    chatFooter.innerHTML = "";
+    options.forEach(opt => {
+      const div = document.createElement('div');
+      div.className = 'option';
+      div.innerHTML = `<span class="material-symbols-rounded">${opt.icon}</span><span>${opt.text}</span>`;
+      div.onclick = () => handleOption(opt);
+      chatFooter.appendChild(div);
+    });
+  }
+
+  function handleOption(option) {
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble user';
+    userBubble.innerText = option.text;
+    chatBody.appendChild(userBubble);
+
+    setTimeout(() => {
+      const botBubble = document.createElement('div');
+      botBubble.className = 'chat-bubble bot';
+      botBubble.innerText = option.reply;
+      chatBody.appendChild(botBubble);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }, 500);
+  }
+</script>
+
+</body>
+</html>

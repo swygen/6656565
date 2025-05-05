@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বন্ধুদের আমন্ত্রণ জানান</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .header {
+            background: linear-gradient(to right, #8e44ad, #3498db);
+            color: white;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header i {
+            cursor: pointer;
+        }
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .tabs {
+            display: flex;
+            background: #fff;
+            justify-content: space-around;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tab.active {
+            color: #3498db;
+            border-color: #3498db;
+        }
+        .content {
+            padding: 16px;
+            background: #fff;
+            margin: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .row:last-child {
+            border-bottom: none;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            padding: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="material-icons-outlined" onclick="location.href='dashboard.html'">arrow_back</i>
+        <div class="header-title">বন্ধুদের আমন্ত্রণ জানান</div>
+        <span></span>
+    </div><div class="tabs">
+    <div class="tab" onclick="location.href='team.html'"><i class="material-icons-outlined">groups</i> সংক্ষিপ্ত বর্ণনা</div>
+    <div class="tab" onclick="location.href='win.html'"><i class="material-icons-outlined">emoji_events</i> পুরস্কার</div>
+    <div class="tab active" onclick="location.href='aii.html'"><i class="material-icons-outlined">account_balance_wallet</i> আয়</div>
+    <div class="tab" onclick="location.href='record.html'"><i class="material-icons-outlined">history</i> রেকর্ডস</div>
+</div>
+
+<div class="content">
+    <h3>আজকের আয়: ৳ 0.00</h3>
+    <div class="row"><span>আমন্ত্রণ পুরস্কার</span><span>৳ 0.00</span></div>
+    <div class="row"><span>সাফল্য পুরস্কার</span><span>৳ 0.00</span></div>
+    <div class="row"><span>জমা ছাড়া</span><span>৳ 0.00</span></div>
+    <div class="row"><span>জমাদানকারী</span><span>0</span></div>
+</div>
+
+<div class="content">
+    <h3>মোট আয় ৳ 0.00</h3>
+    <div class="row"><span>আমন্ত্রণ পুরস্কার</span><span>৳ 0.00</span></div>
+    <div class="row"><span>সাফল্য পুরস্কার</span><span>৳ 0.00</span></div>
+    <div class="row"><span>জমা ছাড়া</span><span>৳ 0.00</span></div>
+    <div class="row"><span>জমাদানকারী</span><span>0</span></div>
+</div>
+
+<div class="footer-note">
+    নোট: সিস্টেমটি তথ্যগুলি ১৫ মিনিটে পর্যন্ত আপডেট করে।
+</div>
+
+</body>
+</html>

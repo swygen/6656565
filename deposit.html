@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deposit</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-red-100 to-yellow-100 min-h-screen p-4">  <div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-5">
+    <!-- Back Button -->
+    <div class="mb-4">
+      <button onclick="window.location.href='dashboard.html'" class="text-red-600 font-semibold flex items-center">
+        <span class="material-icons-outlined mr-1">arrow_back</span> Back
+      </button>
+    </div><!-- Balance -->
+<div class="bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-2xl p-5 mb-5 shadow-xl">
+  <div class="text-lg font-semibold">Balance</div>
+  <div class="text-3xl font-bold" id="balanceAmount">৳0.00</div>
+</div>
+
+<!-- Method Selection -->
+<div class="grid grid-cols-3 gap-3 mb-5">
+  <button onclick="selectMethod('Nagad')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+    <span class="material-icons-outlined text-red-500 text-4xl">account_balance_wallet</span>
+    <div class="mt-1 font-medium">Nagad</div>
+  </button>
+  <button onclick="selectMethod('bKash')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+    <span class="material-icons-outlined text-pink-500 text-4xl">account_balance</span>
+    <div class="mt-1 font-medium">bKash</div>
+  </button>
+  <button onclick="selectMethod('Rocket')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+    <span class="material-icons-outlined text-purple-500 text-4xl">rocket_launch</span>
+    <div class="mt-1 font-medium">Rocket</div>
+  </button>
+</div>
+
+<!-- Selected Method Info -->
+<div class="text-center text-gray-700 font-semibold mb-3">Selected Method: <span id="methodName">None</span></div>
+<input type="hidden" id="selectedMethod" />
+
+<!-- Deposit Amount -->
+<div class="grid grid-cols-3 gap-2 mb-4">
+  <button onclick="document.getElementById('amountInput').value=500" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳500</button>
+  <button onclick="document.getElementById('amountInput').value=1000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳1K</button>
+  <button onclick="document.getElementById('amountInput').value=2000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳2K</button>
+  <button onclick="document.getElementById('amountInput').value=5000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳5K</button>
+  <button onclick="document.getElementById('amountInput').value=10000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳10K</button>
+  <button onclick="document.getElementById('amountInput').value=20000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳20K</button>
+</div>
+
+<!-- Custom Amount -->
+<input type="number" id="amountInput" min="500" max="25000" placeholder="৳500 - ৳25,000" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-5" />
+
+<!-- Deposit Button -->
+<button onclick="goToPayment()" class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-3 rounded-xl text-lg shadow-md hover:shadow-xl">Deposit</button>
+
+<!-- Instructions -->
+<div class="text-sm text-gray-600 mt-5">
+  <ul class="list-disc ml-5 space-y-1">
+    <li>If the transfer time is up, please fill out the deposit form again.</li>
+    <li>The transfer amount must match the order you created.</li>
+    <li>If you transfer the wrong amount, we are not responsible.</li>
+    <li>Do not cancel the deposit order after money is transferred.</li>
+  </ul>
+</div>
+
+<!-- Deposit History -->
+<div class="mt-6 text-center text-gray-400">
+  <span class="material-icons-outlined text-5xl mb-1">receipt_long</span>
+  <p>No data</p>
+</div>
+
+  </div>  <!-- Firebase এবং স্ক্রিপ্ট -->  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // ইউজার আইডি
+    const userId = 'user_ayman';
+    const balanceRef = ref(db, 'users/' + userId + '/balance');
+
+    onValue(balanceRef, (snapshot) => {
+      const balance = snapshot.val();
+      document.getElementById('balanceAmount').innerText = `৳${balance.toFixed(2)}`;
+    });
+
+    // পেমেন্ট পদ্ধতি সিলেক্ট করা
+    window.selectMethod = function(method) {
+      document.getElementById('methodName').innerText = method;
+      document.getElementById('selectedMethod').value = method;
+    }
+
+    // পেমেন্টে যাওয়া
+    window.goToPayment = function() {
+      const amount = document.getElementById('amountInput').value;
+      const method = document.getElementById('selectedMethod').value;
+      if (amount && parseInt(amount) >= 500 && parseInt(amount) <= 25000 && method) {
+        localStorage.setItem('depositAmount', amount);
+        localStorage.setItem('depositMethod', method);
+        window.location.href = 'paymentbd.html';
+      } else {
+        alert('Please select a method and enter a valid amount (৳500 - ৳25000)');
+      }
+    }
+  </script></body>
+</html>

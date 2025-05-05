@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    body {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: #333;
+    }
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 25px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      padding: 25px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .profile img {
+      width: 70px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .balance {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f1f8e9;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+    .balance span {
+      font-weight: bold;
+      color: green;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    .btn-group button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn-deposit { background: #43a047; }
+    .btn-withdraw { background: #1e88e5; }
+    .info-box {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .info-box div {
+      margin: 5px 0;
+    }
+    .menu {
+      margin-bottom: 20px;
+    }
+    .menu button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 14px;
+      background: #f5f5f5;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .menu button i {
+      margin-right: 10px;
+    }
+    .logout {
+      width: 100%;
+      padding: 14px;
+      background: #d32f2f;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile Icon">
+      <div>
+        <div><strong id="uid">UID</strong></div>
+        <div id="email">Email</div>
+      </div>
+    </div><div class="balance">
+  <div><strong>Balance</strong></div>
+  <div><span id="balance">BDT 0</span></div>
+</div>
+
+<div class="btn-group">
+  <button class="btn-deposit" onclick="window.location.href='deposit.html'">Deposit</button>
+  <button class="btn-withdraw" onclick="window.location.href='withdraw.html'">Withdraw</button>
+</div>
+
+<div class="info-box">
+  <div>Total Member of My Team: <strong id="team-count">0</strong></div>
+  <div>Total Earning: <strong>BDT 10000</strong></div>
+  <div>Total Deposit: <strong>BDT 10000</strong></div>
+  <div>Plan Name: <strong>None</strong></div>
+</div>
+
+<div class="menu">
+  <button onclick="window.location.href='deposit.html'"><i class="material-icons">attach_money</i> Deposit Balance</button>
+  <button onclick="window.location.href='withdraw.html'"><i class="material-icons">money_off</i> Withdraw Balance</button>
+  <button onclick="window.location.href='team.html'"><i class="material-icons">group</i> My Team</button>
+  <button onclick="window.location.href='dphistory.html'"><i class="material-icons">history</i> Deposit History</button>
+  <button><i class="material-icons">support_agent</i> Support Service</button>
+</div>
+
+<button class="logout" id="logoutBtn">LOGOUT</button>
+
+  </div>  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = 'index.html';
+      }).catch(error => {
+        alert('Logout failed: ' + error.message);
+      });
+    });
+
+    function generatePremiumUID(uid) {
+      return uid.slice(0, 5).toUpperCase();
+    }
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        const uid = user.uid;
+        document.getElementById('uid').textContent = `UID: ${generatePremiumUID(uid)}`;
+        document.getElementById('email').textContent = user.email;
+
+        const balanceRef = ref(db, `users/${uid}/balance`);
+        const teamRef = ref(db, `users/${uid}/teamCount`);
+
+        onValue(balanceRef, snapshot => {
+          const balance = snapshot.val();
+          document.getElementById('balance').textContent = `BDT ${balance}`;
+        });
+
+        onValue(teamRef, snapshot => {
+          const teamCount = snapshot.val();
+          document.getElementById('team-count').textContent = teamCount;
+        });
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  </script></body>
+</html>

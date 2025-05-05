@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ডিপোজিট হিস্ট্রি</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Bengali', 'Roboto', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: #004d40;
+      padding: 20px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .material-icons-outlined {
+      font-size: 28px;
+      vertical-align: middle;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-top: 40px;
+    }
+
+    .no-history {
+      text-align: center;
+      font-size: 18px;
+      color: #777;
+      padding: 30px 0;
+    }
+
+    .no-history i {
+      font-size: 48px;
+      color: #009688;
+      margin-bottom: 10px;
+    }
+
+    .date-time {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 10px;
+      color: #888;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 20px;
+      }
+
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .no-history {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>
+      <span class="material-icons-outlined">account_balance_wallet</span>
+      ডিপোজিট হিস্ট্রি
+    </h1>
+  </header>
+
+  <div class="container">
+    <div class="no-history">
+      <i class="material-icons-outlined">hourglass_empty</i><br>
+      কোনো ডিপোজিট হিস্ট্রি পাওয়া যায়নি
+    </div>
+    <div class="date-time" id="dateTime"></div>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const formatted = now.toLocaleDateString('bn-BD', options) + ' ' + now.toLocaleTimeString('bn-BD');
+      document.getElementById('dateTime').textContent = `আজকের তারিখ ও সময়: ${formatted}`;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+  </script>
+
+</body>
+</html>

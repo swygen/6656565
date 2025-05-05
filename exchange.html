@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>এক্সচেঞ্জ এখন উপলব্ধ নয়</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Bengali', 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f8fbff, #e0f7fa);
+      color: #333;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .icon {
+      font-size: 72px;
+      color: #ff7043;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #004d40;
+    }
+
+    p {
+      font-size: 18px;
+      color: #666;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    .status-box {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .status-box:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .footer-note {
+      font-size: 14px;
+      margin-top: 30px;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .icon {
+        font-size: 60px;
+      }
+
+      .status-box {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="status-box">
+      <div class="icon material-icons-outlined">sync_disabled</div>
+      <h1>Exchange is Not Available</h1>
+      <p>এই ফিচারটি বর্তমানে উপলব্ধ নয়। আমরা খুব শীঘ্রই এটি চালু করার জন্য কাজ করছি। অনুগ্রহ করে পরে আবার চেষ্টা করুন।</p>
+    </div>
+    <div class="footer-note">আপডেটেড তারিখ: <span id="date"></span></div>
+  </div>
+
+  <script>
+    const today = new Date();
+    document.getElementById("date").textContent = today.toLocaleDateString('bn-BD', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  </script>
+
+</body>
+</html>

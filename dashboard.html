@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Dashboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #000, #333);
+      color: #fff;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(to bottom, #222, #444);
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .announcement {
+      padding: 15px;
+      background: #111;
+      color: #ffcc00;
+      text-align: center;
+      font-size: 16px;
+      border-bottom: 1px solid #444;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      background: #1a1a1a;
+      padding: 15px 0;
+    }
+    .action-item {
+      text-align: center;
+      color: white;
+      cursor: pointer;
+    }
+    .action-item i {
+      font-size: 28px;
+      color: #ffcc00;
+    }
+    .vip-card {
+      background: #222;
+      margin: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #444;
+    }
+    .vip-card img {
+      width: 70px;
+    }
+    .vip-info {
+      flex: 1;
+    }
+    .vip-info h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .vip-info p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .vip-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #111;
+      padding: 10px 0;
+    }
+    .bottom-nav .nav-item {
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .bottom-nav .nav-item i {
+      font-size: 24px;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="header"> InvestSure BD App</div>
+  <div class="announcement">
+    <i class="material-icons">notifications</i> This Is Your Next Level Earning Platfrom By InvestSure 
+  </div>  <div class="actions">
+    <div class="action-item" onclick="location.href='deposit.html'">
+      <i class="material-icons">arrow_upward</i>
+      <div>Deposit</div>
+    </div>
+    <div class="action-item" onclick="location.href='withdraw.html'">
+      <i class="material-icons">arrow_downward</i>
+      <div>Withdraw</div>
+    </div>
+    <div class="action-item" onclick="location.href='team.html'">
+      <i class="material-icons">groups</i>
+      <div>My Team</div>
+    </div>
+    <div class="action-item" onclick="location.href='exchange.html'">
+      <i class="material-icons">swap_horiz</i>
+      <div>Exchange</div>
+    </div>
+  </div>  <!-- VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 1 ⚡</h3>
+      <p>Daily Works 1 Times | Profit BDT 2000<br>Cost For This Plan BDT 800</p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <!-- Duplicate VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 2 ⚡</h3>
+      <p>Daily Works 1 Times | Profit BDT 2500<br>Cost For This Plan BDT 1500</p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 3 ⚡</h3>
+      <p>Daily Works 1 Times | Profit BDT 4000<br>Cost For This Plan BDT <strong><b> 2000</b></strong></p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 4 ⚡</h3>
+      <p>Daily Works 1 Times | Profit BDT 7000<br>Cost For This Plan BDT 3850</p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="bottom-nav">
+    <div class="nav-item" onclick="location.href='dashboard.html'">
+      <i class="material-icons">home</i>
+      <div>Home</div>
+    </div>
+    <div class="nav-item" onclick="location.href='chat.html'">
+      <i class="material-icons">chat</i>
+      <div>Chat</div>
+    </div>
+    <div class="nav-item" onclick="location.href='profile.html'">
+      <i class="material-icons">person</i>
+      <div>Profile</div>
+    </div>
+  </div>
+</body>
+</html>

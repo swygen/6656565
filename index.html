@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InvestSure BD - Premium Auth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    window.signup = () => {
+      const name = document.getElementById("signupName").value;
+      const email = document.getElementById("signupEmail").value;
+      const phone = document.getElementById("signupPhone").value;
+      const referral = document.getElementById("signupReferral").value;
+      const password = document.getElementById("signupPassword").value;
+      const confirmPassword = document.getElementById("signupConfirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          updateProfile(userCredential.user, { displayName: name });
+          alert("Signup successful! Please login.");
+          toggleForms();
+        })
+        .catch(error => alert(error.message));
+    };
+
+    window.login = () => {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.href = "dashboard.html")
+        .catch(error => alert("Login failed: " + error.message));
+    };
+
+    window.forgotPassword = () => {
+      const email = prompt("Enter your email to reset password:");
+      if (email) {
+        sendPasswordResetEmail(auth, email)
+          .then(() => alert("Password reset email sent!"))
+          .catch(error => alert(error.message));
+      }
+    };
+  </script>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 420px;
+      backdrop-filter: blur(12px);
+      color: white;
+      text-align: center;
+    }
+    dotlottie-player {
+      margin-bottom: 15px;
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+    p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background: #111;
+      color: white;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    input:focus {
+      outline: none;
+      border-color: #00ffcc;
+      box-shadow: 0 0 5px 0 #00ffcc;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: black;
+      color: white;
+      border: 1px solid white;
+    }
+    .toggle-link {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/c1815db4-6bcd-4ccc-8586-9fdf49613915/AmN80G2pf7.lottie" background="transparent" speed="1" style="width: 300px; height: 200px" loop autoplay></dotlottie-player>
+
+    <div id="signupForm">
+      <h2>Create Account <strong>InvestSure BD</strong></h2>
+      <p>Signup to continue</p>
+      <input type="text" id="signupName" placeholder="Full Name" required>
+      <input type="email" id="signupEmail" placeholder="Email" required>
+      <input type="tel" id="signupPhone" placeholder="Phone Number" required>
+      <input type="text" id="signupReferral" placeholder="Referral Code (Optional)">
+      <input type="password" id="signupPassword" placeholder="Password" required>
+      <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+      <button onclick="signup()">Signup</button>
+      <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
+    </div>
+
+    <div id="loginForm" class="hidden">
+      <h2>Welcome Back <strong>InvestSure BD</strong></h2>
+      <p>Login to your account</p>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button onclick="login()">Login</button>
+      <span class="toggle-link" onclick="toggleForms()">Don't have an account? Signup</span><br>
+      <span class="toggle-link" onclick="forgotPassword()">Forgot Password?</span>
+    </div>
+  </div>
+
+  <script>
+    function toggleForms() {
+      document.getElementById("signupForm").classList.toggle("hidden");
+      document.getElementById("loginForm").classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>

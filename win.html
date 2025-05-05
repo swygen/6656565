@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>বন্ধুদের আমন্ত্রণ জানান</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #f3f4f9, #dce3f3);
+      color: #333;
+    }
+    .header {
+      background: linear-gradient(to right, #b370ff, #ffb74d);
+      padding: 16px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-around;
+      background: #fff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .nav a {
+      flex: 1;
+      padding: 12px 0;
+      text-align: center;
+      text-decoration: none;
+      color: #555;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav a:hover, .nav a.active {
+      background: linear-gradient(to right, #7c4dff, #6200ea);
+      color: white;
+    }
+    .nav i {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+    .rewards {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .reward-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .reward-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .reward-left img {
+      width: 48px;
+      height: 48px;
+    }
+    .reward-text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .reward-amount {
+      background: linear-gradient(to right, #7c4dff, #00c6ff);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer; /* Add pointer cursor to indicate it's clickable */
+    }
+    .reward-amount:hover {
+      background: linear-gradient(to right, #6200ea, #7c4dff); /* Change color on hover */
+    }
+    .back-button {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    .back-button a {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .back-button a:hover {
+      background: linear-gradient(to right, #5e35b1, #1e88e5);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">বন্ধুদের আমন্ত্রণ জানান</div>
+  <div class="nav">
+    <a href="team.html">
+      <i class="material-icons-outlined">info</i>
+      সংক্ষিপ্ত বর্ণনা
+    </a>
+    <a href="win.html" class="active">
+      <i class="material-icons-outlined">emoji_events</i>
+      পুরস্কার
+    </a>
+    <a href="notice1.html">
+      <i class="material-icons-outlined">attach_money</i>
+      আয়
+    </a>
+    <a href="aii.html">
+      <i class="material-icons-outlined">folder</i>
+      রেকর্ডস
+    </a>
+  </div>
+  <div class="rewards">
+    <!-- Each reward amount now links to notice1.html -->
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="1">
+        <div class="reward-text">মোট ৫ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 300.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 2">
+        <div class="reward-text">মোট ১৫ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 900.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 3">
+        <div class="reward-text">মোট ৩০ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 1800.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 4">
+        <div class="reward-text">মোট ২০০ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 12000.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 5">
+        <div class="reward-text">মোট ৫০০ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 30000.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 6">
+        <div class="reward-text">মোট ১০০০ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 15,000.00</a>
+    </div>
+    <div class="reward-card">
+      <div class="reward-left">
+        <img src="https://assets.onecompiler.app/43ea4pg72/43enawb7b/bonus.gif" alt="Medal 7">
+        <div class="reward-text">মোট ২০০০ টির বেশি বৈধ আমন্ত্রণ</div>
+      </div>
+      <a href="notice1.html" class="reward-amount">৳ 30,000.00</a>
+    </div>
+  </div>
+  <div class="back-button">
+    <a href="dashboard.html">
+      <i class="material-icons-outlined">arrow_back</i>
+      Back
+    </a>
+  </div>
+</body>
+</html>
