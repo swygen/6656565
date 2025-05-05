@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Dashboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #000, #333);
+      color: #fff;
+      padding-bottom: 80px;
+    }
+    .header {
+      background: linear-gradient(to bottom, #222, #444);
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .announcement {
+      padding: 15px;
+      background: #111;
+      color: #ffcc00;
+      text-align: center;
+      font-size: 16px;
+      border-bottom: 1px solid #444;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      background: #1a1a1a;
+      padding: 15px 0;
+    }
+    .action-item {
+      text-align: center;
+      color: white;
+      cursor: pointer;
+    }
+    .action-item i {
+      font-size: 28px;
+      color: #ffcc00;
+    }
+    .vip-card {
+      background: #222;
+      margin: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #444;
+    }
+    .vip-card img {
+      width: 70px;
+    }
+    .vip-info {
+      flex: 1;
+    }
+    .vip-info h3 {
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .vip-info p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    .vip-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .btn {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #ffcc00;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #111;
+      padding: 10px 0;
+    }
+    .bottom-nav .nav-item {
+      text-align: center;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .bottom-nav .nav-item i {
+      font-size: 24px;
+      color: #ffcc00;
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">
+    <i class="material-icons">notifications</i> This Is Your Next Level Earning Platfrom By InvestSure 
+  </div>  <div class="actions">
+    <div class="action-item" onclick="location.href='deposit.html'">
+      <i class="material-icons">arrow_upward</i>
+      <div>Deposit</div>
+    </div>
+    <div class="action-item" onclick="location.href='withdraw.html'">
+      <i class="material-icons">arrow_downward</i>
+      <div>Withdraw</div>
+    </div>
+    <div class="action-item" onclick="location.href='team.html'">
+      <i class="material-icons">groups</i>
+      <div>My Team</div>
+    </div>
+    <div class="action-item" onclick="location.href='exchange.html'">
+      <i class="material-icons">swap_horiz</i>
+      <div>Exchange</div>
+    </div>
+  </div>  <!-- VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 1 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong>285</strong> টাকা | মোট <strong>1,995 </strong>টাকা |
+মাত্র <strong>800</strong> টাকায় <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <!-- Duplicate VIP Cards -->  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 2 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong>400</strong> টাকা | মোট<strong> 2,800 </strong>টাকা |
+      মাত্র<strong> 1400</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+  
+    <div class="vip-info">
+      <h3>VIP 3 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong> 571  </strong>টাকা | মোট <strong> 4,000 </strong> টাকা | মাত্র <strong>1900 </strong>টাকায় |  <strong>7</strong>  দিনের প্ল্যান সক্রিয় করুন।</h4>
+      </p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>  <div class="vip-card">
+    <div class="vip-info">
+      <h3>VIP 4 ⚡</h3>
+      <p><h4>প্রতি দিন আয় <strong> 1,000  </strong>টাকা | মোট <strong> 7,000 </strong> টাকা | মাত্র <strong>3400 </strong>টাকায় |  <strong>7</strong>  দিনের প্ল্যান সক্রিয় করুন।</h4>
+      </p>
+      <div class="vip-buttons">
+        <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+        <button class="btn" onclick="location.href='claim.html'">Claim</button>
+      </div>
+    </div>
+    
+    
+    <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+    
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 5 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>1,500</strong> টাকা | মোট <strong>10,500</strong> টাকা | মাত্র <strong>5000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 6 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>2,000</strong> টাকা | মোট <strong>14,000</strong> টাকা | মাত্র <strong>6800</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 7 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>2,800</strong> টাকা | মোট <strong>19,600</strong> টাকা | মাত্র <strong>9500</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 8 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>3,500</strong> টাকা | মোট <strong>24,500</strong> টাকা | মাত্র <strong>11,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 9 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>4,200</strong> টাকা | মোট <strong>29,400</strong> টাকা | মাত্র <strong>13,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <div class="vip-card">
+  <div class="vip-info">
+  <h3>VIP 10 ⚡</h3>
+  <p><h4>প্রতি দিন আয় <strong>5,000</strong> টাকা | মোট <strong>35,000</strong> টাকা | মাত্র <strong>15,000</strong> টাকায় | <strong>7</strong> দিনের প্ল্যান সক্রিয় করুন।</h4></p>
+  <div class="vip-buttons">
+  <button class="btn" onclick="location.href='purchase.html'">Purchase</button>
+  <button class="btn" onclick="location.href='claim.html'">Claim</button>
+  </div>
+  </div>
+  <img src="https://assets.onecompiler.app/43ea4pg72/43ejuea6k/investing.png" alt="VIP Icon">
+  </div>
+  <br>
+  <br>
+  <br>
+    <div class="bottom-nav">
+   <div class="nav-item" onclick="location.href='dashboard.html'">
+      <i class="material-icons">home</i>
+      <div>Home</div>
+    </div>
+    <div class="nav-item" onclick="location.href='chat.html'">
+      <i class="material-icons">chat</i>
+      <div>Chat</div>
+    </div>
+    <div class="nav-item" onclick="location.href='profile.html'">
+      <i class="material-icons">person</i>
+      <div>Profile</div>
+    </div>
+  </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestSure - স্বাগতম</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Body Styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Pop-up Styling */
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      text-align: center;
+      color: #ffcc00;
+      font-size: 18px;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .popup-container h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .popup-container p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .popup-btns {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .popup-btn {
+      padding: 15px 25px;
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .popup-btn:hover {
+      background-color: #e0a900;
+    }
+
+    /* Sparkle Effect */
+    #sparkleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9998;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Overlay for the background when popup is active */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9997;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Overlay for Popup -->
+  <div id="popup-overlay" class="popup-overlay"></div>
+
+  <!-- Popup Message -->
+  <div id="popup-message" class="popup-container">
+    <h2>স্বাগতম InvestSure এ!</h2>
+    <p>অভিনন্দন! আপনি <strong>100 টাকা</strong> সাইন আপ বোনাস পেয়েছেন। এছাড়াও, <strong>1000 টাকা</strong> বা তার বেশি আমানত করলে আপনি <strong>20% কমিশন</strong> পাবেন।</p>
+    <div class="popup-btns">
+      <button class="popup-btn" id="do-not-remind">২৪ ঘণ্টা আর মেসেজ না দেখান</button>
+      <button class="popup-btn" id="close-popup">বন্ধ করুন</button>
+    </div>
+  </div>
+
+  <!-- Sparkle Effect -->
+  <canvas id="sparkleCanvas"></canvas>
+
+  <script>
+    // Sparkle Effect
+    const canvas = document.getElementById('sparkleCanvas');
+    const ctx = canvas.getContext('2d');
+    let sparkles = [];
+
+    // Resize the canvas to match the window size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Create a sparkle effect
+    function createSparkle() {
+      return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speed: Math.random() * 1 + 0.5,
+        opacity: Math.random(),
+      };
+    }
+
+    // Draw the sparkle effect
+    function drawSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      sparkles.forEach((sparkle, index) => {
+        ctx.beginPath();
+        ctx.arc(sparkle.x, sparkle.y, sparkle.size, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(255, 215, 0, ${sparkle.opacity})`;
+        ctx.fill();
+        sparkle.y += sparkle.speed;
+        sparkle.opacity -= 0.005;
+        if (sparkle.opacity <= 0) {
+          sparkles[index] = createSparkle();
+          sparkles[index].y = 0;
+        }
+      });
+      requestAnimationFrame(drawSparkles);
+    }
+
+    for (let i = 0; i < 100; i++) {
+      sparkles.push(createSparkle());
+    }
+
+    drawSparkles();
+
+    // Show popup on page load if it's not dismissed
+    window.onload = function() {
+      if (!localStorage.getItem('dismissedPopup')) {
+        document.getElementById('popup-overlay').style.display = 'block';
+        document.getElementById('popup-message').style.display = 'block';
+      }
+    };
+
+    // Do Not Remind for 24 hours
+    document.getElementById('do-not-remind').addEventListener('click', function() {
+      localStorage.setItem('dismissedPopup', 'true');
+      document.getElementById('popup-overlay').style.display = 'none';
+      document.getElementById('popup-message').style.display = 'none';
+    });
+
+    // Close the popup manually
+    document.getElementById('close-popup').addEventListener('click', function() {
+      document.getElementById('popup-overlay').style.display = 'none';
+      document.getElementById('popup-message').style.display = 'none';
+    });
+  </script>
+</body>
+</html>
