@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>আয় হিসাবনিকেশন</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
   <style>
     :root {
       --primary: #7b2ff7;
@@ -126,7 +128,6 @@
       text-align: center;
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
       margin: 10px;
-      min-width: 00px;
     }
 
     .footer-icons {
@@ -164,66 +165,71 @@
       <img src="https://assets.onecompiler.app/43ea4pg72/43en9ruqw/teamwork.gif" alt="হিসাব ছবিঃ ১" />
     </div>
     <h2>আয় হিসাবনিকেশন</h2>
-    <p>আপনার বর্তমান রেফারাল <strong> 0 </strong> সবোর্চ্চ ৫ টা রেফার করে ৩০০ টাকা বোনাস সংগ্রহ করুন ! Par Refar ৳ 60.00</p>
-    <input type="text" id="inviteLink" value="https://invest-sure-bd.netlify.app?ref=" readonly />
+    <p>আপনার বর্তমান রেফারাল <strong>0</strong> সবোর্চ্চ ৫ টা রেফার করে ৩০০ টাকা বোনাস সংগ্রহ করুন ! Par Refar ৳ 60.00</p>
+    <input type="text" id="inviteLink" readonly />
     <div>
-      <button class="button" onclick="copyLink()">কপি লিংক</button>
-      <button class="button" onclick="shareLink()">আপনি আপনার বন্ধুদের সাথে ভাগ করতে পারেন</button>
+      <button class="button" onclick="generateAndCopyLink()">কপি লিংক</button>
+      <button class="button" onclick="generateAndShareLink()">আপনি আপনার বন্ধুদের সাথে ভাগ করতে পারেন</button>
     </div>
   </div>
   <div class="image-box">
     <img src="https://assets.onecompiler.app/43ea4pg72/43en9ruqw/top-player.png" alt="পুরস্কার চিত্র" />
   </div>
   <div class="leaderboard">
-    <div class="leader">
-      <h3>🥇 ১ম</h3>
-      <p>৳ 20876.71</p>
-    </div>
-    <div class="leader">
-      <h3>🥈 ২য়</h3>
-      <p>৳ 16437.41</p>
-    </div>
-    <div class="leader">
-      <h3>🥉 ৩য়</h3>
-      <p>৳ 10865.09</p>
-    </div>
+    <div class="leader"><h3>🥇 ১ম</h3><p>৳ 20876.71</p></div>
+    <div class="leader"><h3>🥈 ২য়</h3><p>৳ 16437.41</p></div>
+    <div class="leader"><h3>🥉 ৩য়</h3><p>৳ 10865.09</p></div>
   </div>
 
   <script>
-    // Generate a random 8-character referral code
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Random code generator
     function generateReferralCode() {
-      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let code = "";
       for (let i = 0; i < 8; i++) {
-        result += characters.charAt(Math.floor(Math.random() * characters.length));
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
       }
-      return result;
+      return code;
     }
 
-    // Function to copy the referral link
-    function copyLink() {
+    // Generate link and copy
+    function generateAndCopyLink() {
       const code = generateReferralCode();
-      const inviteLink = document.getElementById("inviteLink");
-      inviteLink.value = `https://invest-sure-bd.netlify.app?ref=${code}`;
-      inviteLink.select();
-      inviteLink.setSelectionRange(0, 99999); // For mobile devices
-      navigator.clipboard.writeText(inviteLink.value);
-      alert("লিংক কপি হয়েছে!");
+      const link = `https://invest-sure-bd.netlify.app/signup.html?ref=${code}`;
+      document.getElementById("inviteLink").value = link;
+      navigator.clipboard.writeText(link);
+      db.ref("referrals/" + code).set({ used: false });
+      alert("রেফারেল লিংক কপি হয়েছে!");
     }
 
-    // Function to share the referral link
-    function shareLink() {
+    // Generate link and share
+    function generateAndShareLink() {
       const code = generateReferralCode();
-      const link = `https://invest-sure.netlify.app?ref=${code}`;
-      const shareText = `আমার সাথে ইনভেস্ট করতে এখানে যান: ${link}`;
+      const link = `https://invest-sure.netlify.app/signup.html?ref=${code}`;
+      db.ref("referrals/" + code).set({ used: false });
+
       if (navigator.share) {
         navigator.share({
-          title: 'Invest Sure',
-          text: shareText,
+          title: "Invest Sure",
+          text: "আমার রেফারেল লিংক ব্যবহার করে সাইন আপ করুন!",
           url: link
         });
       } else {
-        alert("আপনার ডিভাইসে শেয়ার অপশন সমর্থিত নয়, লিংকটি কপি করে শেয়ার করুন।");
+        alert("আপনার ডিভাইসে শেয়ার অপশন নেই, কপি করে শেয়ার করুন।");
       }
     }
   </script>
