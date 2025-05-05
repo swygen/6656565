@@ -195,6 +195,14 @@
         trxid: trxid,
         timestamp: new Date().toISOString()
       };
+      // paymentbd.html এর সাবমিশনে
+const deposit = {
+  method: "Bkash", 
+  amount: "1000 BDT", 
+  trxId: "TX987654", 
+  time: new Date().toISOString()
+};
+localStorage.setItem("depositData", JSON.stringify(deposit));
 
       db.ref("deposits/" + userId).push(paymentData)
         .then(() => {
