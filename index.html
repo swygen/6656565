@@ -188,5 +188,12 @@
       document.getElementById("loginForm").classList.toggle("hidden");
     }
   </script>
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const refCode = urlParams.get('ref');
+  if (refCode) {
+    document.getElementById("referralField").value = refCode;
+  }
+  </script>
 </body>
 </html>
