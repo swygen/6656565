@@ -1,87 +1,85 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ডিপোজিট হিস্ট্রি</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ইউজার হিস্ট্রি</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
-      font-family: 'Noto Sans Bengali', 'Roboto', sans-serif;
-      background: linear-gradient(to right, #f0f4f8, #ffffff);
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #004d40;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+      color: #263238;
       padding: 20px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 24px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .material-icons-outlined {
-      font-size: 28px;
-      vertical-align: middle;
     }
     .container {
-      padding: 30px 20px;
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 800px;
+      margin: auto;
       background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #00695c;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+    .section-title {
+      font-size: 22px;
+      color: #004d40;
       margin-top: 40px;
+      margin-bottom: 15px;
+      border-left: 5px solid #00acc1;
+      padding-left: 10px;
     }
-    .history {
+    .entry {
+      background: #e3f2fd;
+      padding: 18px;
+      border-radius: 15px;
       margin-bottom: 20px;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
     }
-    .status-pending { color: #FFA000; }
-    .status-rejected { color: #D32F2F; }
-    .no-history {
+    .entry:hover {
+      transform: scale(1.01);
+    }
+    .entry i {
+      font-size: 20px;
+      color: #039be5;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .no-entry {
       text-align: center;
-      font-size: 18px;
-      color: #777;
-      padding: 30px 0;
-    }
-    .no-history i {
-      font-size: 48px;
-      color: #009688;
-      margin-bottom: 10px;
-    }
-    .date-time {
-      text-align: center;
-      font-size: 14px;
-      margin-top: 10px;
       color: #888;
+      font-size: 18px;
+      padding: 25px 0;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      h2 { font-size: 24px; }
+      .section-title { font-size: 18px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1><span class="material-icons-outlined">account_balance_wallet</span> ডিপোজিট হিস্ট্রি</h1>
-  </header>
   <div class="container">
-    <div id="historyList" class="no-history">
-      <i class="material-icons-outlined">hourglass_empty</i><br>
-      কোনো ডিপোজিট হিস্ট্রি পাওয়া যায়নি
-    </div>
-    <div class="date-time" id="dateTime"></div>
+    <h2><span class="material-icons-outlined">history</span> ইউজার হিস্ট্রি</h2>
+
+    <div class="section-title"><span class="material-icons-outlined">card_giftcard</span> জয়েন বোনাস</div>
+    <div id="bonusHistory" class="no-entry">লোড হচ্ছে...</div>
+
+    <div class="section-title"><span class="material-icons-outlined">account_balance_wallet</span> ডিপোজিট হিস্ট্রি</div>
+    <div id="depositHistory" class="no-entry">লোড হচ্ছে...</div>
   </div>
 
   <script>
@@ -94,68 +92,61 @@
       messagingSenderId: "501448994050",
       appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
     };
-
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.database();
 
-    function updateDateTime() {
-      const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const formatted = now.toLocaleDateString('bn-BD', options) + ' ' + now.toLocaleTimeString('bn-BD');
-      document.getElementById('dateTime').textContent = `আজকের তারিখ ও সময়: ${formatted}`;
-    }
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
-
     auth.onAuthStateChanged(user => {
       if (user) {
         const uid = user.uid;
-        const userRef = db.ref('deposits/' + uid);
-        
-        // সাইন আপ বোনাস একবারের জন্য
-        userRef.once('value').then(snapshot => {
-          if (!snapshot.exists()) {
-            userRef.push({
-              method: "সাইন আপ বোনাস",
-              amount: "১০০ টাকা",
-              trxId: "BONUS",
-              time: new Date().toISOString(),
-              status: "Approved"
-            });
-          }
-        });
 
-        userRef.on('value', snap => {
-          const data = snap.val();
-          const container = document.getElementById('historyList');
+        const bonusRef = db.ref('bonus/' + uid);
+        bonusRef.once('value').then(snapshot => {
+          const container = document.getElementById('bonusHistory');
           container.innerHTML = '';
+          const data = snapshot.val();
+
           if (!data) {
-            container.innerHTML = `
-              <div class="no-history">
-                <i class="material-icons-outlined">hourglass_empty</i><br>
-                কোনো ডিপোজিট হিস্ট্রি পাওয়া যায়নি
-              </div>`;
+            container.innerHTML = `<div class="no-entry">কোনো বোনাস পাওয়া যায়নি</div>`;
             return;
           }
 
-          Object.values(data).forEach(entry => {
-            const timePassed = (Date.now() - new Date(entry.time).getTime()) / 3600000;
-            const status = entry.status === "Approved" ? "Approved"
-                        : timePassed >= 1 ? "Rejected" : "Pending";
-            const statusClass = status === "Rejected" ? "status-rejected" : "status-pending";
-
+          Object.values(data).forEach(bonus => {
             container.innerHTML += `
-              <div class="history">
-                <strong>পেমেন্ট মেথড:</strong> ${entry.method}<br>
-                <strong>এমাউন্ট:</strong> ${entry.amount}<br>
-                <strong>ট্রাঞ্জেকশন:</strong> ${entry.trxId}<br>
-                <strong>তারিখ ও সময়:</strong> ${new Date(entry.time).toLocaleString('bn-BD')}<br>
-                <strong>স্ট্যাটাস:</strong> <span class="${statusClass}">${status}</span>
+              <div class="entry">
+                <i class="material-icons-outlined">star</i><strong>বোনাস টাইপ:</strong> ${bonus.type || 'রেফারেল বোনাস'}<br>
+                <i class="material-icons-outlined">attach_money</i><strong>এমাউন্ট:</strong> ${bonus.amount}<br>
+                <i class="material-icons-outlined">access_time</i><strong>তারিখ:</strong> ${new Date(bonus.time).toLocaleString('bn-BD')}
               </div>`;
           });
         });
 
+        const depositRef = db.ref('deposits/' + uid);
+        depositRef.once('value').then(snapshot => {
+          const container = document.getElementById('depositHistory');
+          container.innerHTML = '';
+          const data = snapshot.val();
+
+          if (!data) {
+            container.innerHTML = `<div class="no-entry">কোনো ডিপোজিট পাওয়া যায়নি</div>`;
+            return;
+          }
+
+          Object.values(data).forEach(entry => {
+            const status = entry.status || 'Pending';
+            container.innerHTML += `
+              <div class="entry">
+                <i class="material-icons-outlined">payment</i><strong>পেমেন্ট মেথড:</strong> ${entry.method}<br>
+                <i class="material-icons-outlined">attach_money</i><strong>এমাউন্ট:</strong> ${entry.amount}<br>
+                <i class="material-icons-outlined">confirmation_number</i><strong>ট্রাঞ্জেকশন আইডি:</strong> ${entry.trxId}<br>
+                <i class="material-icons-outlined">access_time</i><strong>তারিখ:</strong> ${new Date(entry.time).toLocaleString('bn-BD')}<br>
+                <i class="material-icons-outlined">task_alt</i><strong>স্ট্যাটাস:</strong> ${status}
+              </div>`;
+          });
+        });
+
+      } else {
+        alert("প্রথমে লগইন করুন!");
       }
     });
   </script>
