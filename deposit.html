@@ -37,17 +37,35 @@
 <!-- Selected Method Info -->
 <div class="text-center text-gray-700 font-semibold mb-3">Selected Method: <span id="methodName">None</span></div>
 <input type="hidden" id="selectedMethod" />
-
 <!-- Deposit Amount -->
-<div class="grid grid-cols-3 gap-2 mb-4">
-  <button onclick="document.getElementById('amountInput').value=500" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳500</button>
-  <button onclick="document.getElementById('amountInput').value=1000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳1K</button>
-  <button onclick="document.getElementById('amountInput').value=2000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳2K</button>
-  <button onclick="document.getElementById('amountInput').value=5000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳5K</button>
-  <button onclick="document.getElementById('amountInput').value=10000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳10K</button>
-  <button onclick="document.getElementById('amountInput').value=20000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium">৳20K</button>
-</div>
+<div class="grid grid-cols-3 gap-2 mb-4 relative">
+  <button onclick="document.getElementById('amountInput').value=500" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium relative">৳500</button>
+  
+  <div class="relative">
+    <button onclick="document.getElementById('amountInput').value=1000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium w-full">৳1K</button>
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full transform translate-x-1/2 -translate-y-1/2">+20%</span>
+  </div>
+  
+  <div class="relative">
+    <button onclick="document.getElementById('amountInput').value=2000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium w-full">৳2K</button>
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full transform translate-x-1/2 -translate-y-1/2">+20%</span>
+  </div>
 
+  <div class="relative">
+    <button onclick="document.getElementById('amountInput').value=5000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium w-full">৳5K</button>
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full transform translate-x-1/2 -translate-y-1/2">+20%</span>
+  </div>
+
+  <div class="relative">
+    <button onclick="document.getElementById('amountInput').value=10000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium w-full">৳10K</button>
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full transform translate-x-1/2 -translate-y-1/2">+20%</span>
+  </div>
+
+  <div class="relative">
+    <button onclick="document.getElementById('amountInput').value=20000" class="bg-gray-100 hover:bg-gray-200 p-2 rounded-xl font-medium w-full">৳20K</button>
+    <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full transform translate-x-1/2 -translate-y-1/2">+20%</span>
+  </div>
+</div>
 <!-- Custom Amount -->
 <input type="number" id="amountInput" min="500" max="25000" placeholder="৳500 - ৳25,000" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-5" />
 
