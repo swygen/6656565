@@ -73,6 +73,21 @@
           .catch(error => alert(error.message));
       }
     };
+    import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    
+    const provider = new GoogleAuthProvider();
+    
+    window.googleSignIn = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+    const user = result.user;
+    alert("Google Sign-In Successful!");
+    window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+    alert("Google Sign-In Failed: " + error.message);
+    });
+    };
 
     // Auto-fill referral from URL
     window.addEventListener("DOMContentLoaded", () => {
@@ -167,12 +182,15 @@
 </head>
 <body>
   <div class="container">
-    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-    <dotlottie-player src="https://lottie.host/c1815db4-6bcd-4ccc-8586-9fdf49613915/AmN80G2pf7.lottie" background="transparent" speed="1" style="width: 300px; height: 200px" loop autoplay></dotlottie-player>
+    
 
     <div id="signupForm">
       <h2>Create Account <strong>InvestSure BD</strong></h2>
       <p>Signup to get started</p>
+      <button onclick="googleSignIn()" style="background: #fff; color: #000; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
+      <img src="https://i.postimg.cc/9Fjpg0tr/google-symbol.png" alt="Google logo" style="width: 20px; height: 20px;">
+      Sign in with Google
+      </button>
       <input type="text" id="signupName" placeholder="Full Name" required>
       <input type="email" id="signupEmail" placeholder="Email" required>
       <input type="tel" id="signupPhone" placeholder="Phone Number" required>
@@ -186,6 +204,10 @@
     <div id="loginForm" class="hidden">
       <h2>Welcome Back <strong>InvestSure BD</strong></h2>
       <p>Login to your account</p>
+      <button onclick="googleSignIn()" style="background: #fff; color: #000; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
+      <img src="https://i.postimg.cc/9Fjpg0tr/google-symbol.png" alt="Google logo" style="width: 20px; height: 20px;">
+      Sign in with Google
+      </button>
       <input type="email" id="loginEmail" placeholder="Email" required>
       <input type="password" id="loginPassword" placeholder="Password" required>
       <button onclick="login()">Login</button>
@@ -195,10 +217,12 @@
   </div>
 
   <script>
+  
     function toggleForms() {
       document.getElementById("signupForm").classList.toggle("hidden");
       document.getElementById("loginForm").classList.toggle("hidden");
     }
+    
   </script>
   <script>
   const urlParams = new URLSearchParams(window.location.search);
