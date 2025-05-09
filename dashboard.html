@@ -457,3 +457,35 @@
   </script>
 </body>
 </html>
+<!-- Chat Icon -->
+<div id="chat-icon" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; cursor: pointer;">
+  <img src="https://i.postimg.cc/6QbPf9ZH/paper.png" alt="Chat" style="width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+</div>
+
+<!-- Chat Modal -->
+<div id="chat-modal" style="display: none; position: fixed; bottom: 90px; right: 20px; background: white; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); padding: 20px; width: 300px; z-index: 10000; font-family: 'Segoe UI', sans-serif;">
+  <h3 style="margin-top: 0; font-size: 18px; color: #333;">নিত্যনতুন আপডেট ও বোনাস পেতে বটে জয়েন করুন</h3>
+  <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+    <button onclick="joinTelegram()" style="padding: 8px 16px; background-color: #0088cc; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Yes</button>
+    <button onclick="closeModal()" style="padding: 8px 16px; background-color: #ccc; color: #333; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">No</button>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+  const chatIcon = document.getElementById('chat-icon');
+  const chatModal = document.getElementById('chat-modal');
+
+  chatIcon.addEventListener('click', () => {
+    chatModal.style.display = 'block';
+  });
+
+  function joinTelegram() {
+    window.open('https://t.me/Tips_invest_sure_bot', '_blank');
+    chatModal.style.display = 'none';
+  }
+
+  function closeModal() {
+    chatModal.style.display = 'none';
+  }
+    </script>
