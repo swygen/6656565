@@ -6,103 +6,21 @@
   <title>Deposit</title>  
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">  
   <style>  
-    body {  
-      margin: 0;  
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-      background: linear-gradient(to bottom right, #fff0e6, #ffe6cc);  
-      color: #333;  
-    }  
-    .container {  
-      max-width: 420px;  
-      margin: 20px auto;  
-      background: #fff;  
-      border-radius: 20px;  
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);  
-      overflow: hidden;  
-    }  
-    .header {  
-      background: #d32f2f;  
-      padding: 20px;  
-      color: white;  
-      text-align: center;  
-      position: relative;  
-    }  
-    .header h2 {  
-      margin: 0;  
-      font-size: 1.8rem;  
-    }  
-    .time {  
-      position: absolute;  
-      top: 15px;  
-      right: 20px;  
-      font-weight: 500;  
-      font-size: 0.9rem;  
-    }  
-    .amount-box {  
-      padding: 20px;  
-      text-align: center;  
-    }  
-    .amount-box h3 {  
-      font-size: 2.5rem;  
-      color: #d32f2f;  
-      margin: 0;  
-    }  
-    .copy-icon {  
-      font-size: 1rem;  
-      margin-left: 10px;  
-      cursor: pointer;  
-      color: #d32f2f;  
-    }  
-    .step {  
-      padding: 15px 20px;  
-      border-top: 1px solid #eee;  
-    }  
-    .step h4 {  
-      margin: 0 0 10px;  
-      color: #d32f2f;  
-      font-size: 1.1rem;  
-    }  
-    .step-box {  
-      background: #fbe9e7;  
-      padding: 10px 15px;  
-      border-radius: 10px;  
-      margin-bottom: 10px;  
-      font-size: 0.95rem;  
-      display: flex;  
-      justify-content: space-between;  
-      align-items: center;  
-    }  
-    input[type="text"] {  
-      width: 100%;  
-      padding: 12px;  
-      border: 1px solid #ddd;  
-      border-radius: 10px;  
-      margin-top: 10px;  
-      font-size: 1rem;  
-    }  
-    button {  
-      background: #d32f2f;  
-      color: white;  
-      border: none;  
-      padding: 12px;  
-      border-radius: 10px;  
-      width: 100%;  
-      margin-top: 15px;  
-      font-size: 1rem;  
-      cursor: pointer;  
-      transition: 0.3s;  
-    }  
-    button:hover {  
-      background: #b71c1c;  
-    }  
-    .back-link {  
-      display: block;  
-      text-align: center;  
-      margin: 20px auto;  
-      font-weight: bold;  
-      color: #d32f2f;  
-      text-decoration: none;  
-    }  
+    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(to bottom right, #fff0e6, #ffe6cc); color: #333; }
+    .container { max-width: 420px; margin: 20px auto; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+    .header { background: #d32f2f; padding: 20px; color: white; text-align: center; position: relative; }
+    .header h2 { margin: 0; font-size: 1.8rem; }
+    .time { position: absolute; top: 15px; right: 20px; font-weight: 500; font-size: 0.9rem; }
+    .amount-box { padding: 20px; text-align: center; }
+    .amount-box h3 { font-size: 2.5rem; color: #d32f2f; margin: 0; }
+    .copy-icon { font-size: 1rem; margin-left: 10px; cursor: pointer; color: #d32f2f; }
+    .step { padding: 15px 20px; border-top: 1px solid #eee; }
+    .step h4 { margin: 0 0 10px; color: #d32f2f; font-size: 1.1rem; }
+    .step-box { background: #fbe9e7; padding: 10px 15px; border-radius: 10px; margin-bottom: 10px; font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; }
+    input[type="text"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; margin-top: 10px; font-size: 1rem; }
+    button { background: #d32f2f; color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; margin-top: 15px; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #b71c1c; }
+    .back-link { display: block; text-align: center; margin: 20px auto; font-weight: bold; color: #d32f2f; text-decoration: none; }
   </style>  
 </head>  
 <body>  
@@ -116,7 +34,7 @@
       <div style="color:#d32f2f;font-size:0.9rem;">Please do not change the amount</div>  
     </div>  
     <div class="step">  
-      <h4>Step 1: Copy this Personal Number And Sand Money This Address</h4>  
+      <h4>Step 1: Copy this Personal Number And Send Money to This Address</h4>  
       <div class="step-box">  
         <span id="agentNumber">00000000000</span>  
         <span class="material-icons-outlined copy-icon" onclick="copyText('agentNumber')">content_copy</span>  
@@ -140,10 +58,9 @@
       authDomain: "fir-bot-bd5e8.firebaseapp.com",
       databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
       projectId: "fir-bot-bd5e8",
-      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      storageBucket: "fir-bot-bd5e8.appspot.com",
       messagingSenderId: "501448994050",
-      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
-      measurementId: "G-3ERPTBHN6N"
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -176,7 +93,7 @@
     }  
 
     function submitTransaction() {  
-      const trxid = document.getElementById("trxid").value;  
+      const trxid = document.getElementById("trxid").value.trim();  
       if (!trxid || trxid.length < 6) {  
         alert("Please enter a valid Transaction ID");  
         return;  
@@ -194,7 +111,8 @@
 
       db.ref("deposits/" + userId).push(paymentData)  
         .then(() => {  
-          window.location.href = "veryfidp.html";  
+          alert("Your transaction information was not found. Please submit the information after making the payment correctly. Thank you.");  
+          document.getElementById("trxid").value = ""; // Clear input  
         })  
         .catch((error) => {  
           alert("Error saving to database: " + error.message);  
