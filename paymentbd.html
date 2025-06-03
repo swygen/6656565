@@ -110,7 +110,7 @@
 
       db.ref("deposits/" + userId).push(paymentData)  
         .then(() => {  
-          alert("Your transaction information was not found. Please submit the information after making the payment correctly. Thank you.");  
+          alert("Thank you. Your payment request has been submitted successfully. Please wait a moment while we verify and confirm.");  
           document.getElementById("trxid").value = ""; // Clear input  
         })  
         .catch((error) => {  
