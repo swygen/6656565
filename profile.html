@@ -115,7 +115,7 @@
       </div>
     </div><div class="balance">
   <div><strong>Balance</strong></div>
-  <div><span id="balance">BDT 100</span></div>
+  <div><span id="balance">BDT 0</span></div>
 </div>
 
 <div class="btn-group">
@@ -125,8 +125,8 @@
 
 <div class="info-box">
   <div>Total Member of My Team: <strong id="team-count">0</strong></div>
-  <div>Total Earning: <strong>BDT 0</strong></div>
-  <div>Total Deposit: <strong>BDT 0</strong></div>
+  <div>Total Earning: <strong>BDT 10000</strong></div>
+  <div>Total Deposit: <strong>BDT 10000</strong></div>
   <div>Plan Name: <strong>None</strong></div>
 </div>
 
@@ -183,7 +183,7 @@
 
         onValue(balanceRef, snapshot => {
           const balance = snapshot.val();
-          document.getElementById('balance').textContent = `BDT 100.00`;
+          document.getElementById('balance').textContent = `BDT ${balance}`;
         });
 
         onValue(teamRef, snapshot => {
