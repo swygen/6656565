@@ -1,6 +1,137 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exclusive Popup</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    /* Base Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+}
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Glass Popup */
+.popup-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  position: relative;
+  color: #fff;
+  animation: popupFade 0.4s ease;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Close Button */
+.popup-box .close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #ffffffee;
+}
+
+/* Message Text */
+.popup-box .popup-message {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Telegram Button */
+.popup-box .telegram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0088cc;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.popup-box .telegram-btn i.material-icons {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.popup-box .telegram-btn:hover {
+  background-color: #0070a8;
+}
+
+@keyframes popupFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-box {
+    padding: 1.5rem;
+  }
+
+  .popup-box .popup-message {
+    font-size: 0.95rem;
+  }
+
+  .popup-box .telegram-btn {
+    width: 100%;
+  }
+}
+
+  </style>
+</head>
+<body><!-- Popup Markup --><div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <span class="material-icons close-btn" onclick="closePopup()">close</span>
+    <div class="popup-message">
+      Those whose accounts are showing a balance of <strong>(NULL)</strong> due to technical issues should contact our team!
+    </div>
+    <a href="https://t.me/sup_invest_team01" target="_blank" class="telegram-btn">
+      <i class="material-icons">send</i> Contact via Telegram
+    </a>
+  </div>
+</div><!-- JS --><script>
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script></body>
+</html><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Dashboard</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
