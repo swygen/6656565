@@ -1,0 +1,20 @@
+{
+  "name": "INVEST SURE BD",
+  "short_name": "INVESTSURE",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d47a1",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/85VHs9sh/IMG-20250605-084804-894.jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/85VHs9sh/IMG-20250605-084804-894.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
