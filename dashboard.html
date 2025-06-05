@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invest Sure | আপনার উপার্জন এর এক অনন্য সুযোগ </title>
+ <link rel="manifest" href="manifest.json">
   <!-- start webpushr code --> <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('setup',{'key':'BGdtPsdCzdVvZexto1ZPuoOpKDoXTQsVszj3iOoop54XwcTyQYXhdcgsm9JyCwFsM7qu5EdxJMWTNZy7XkPLdYU' });</script><!-- end webpushr code -->
   <!-- Standard favicon -->
   <link rel="icon" type="image/jpeg" sizes="32x32" href="https://i.postimg.cc/ZR4hHy3X/money-growth-logo-design-financial-growth-up-logo-design-vector-template-631577-816.jpg">
@@ -12,7 +13,28 @@
 
   <!-- Android Chrome -->
   <link rel="icon" sizes="192x192" href="https://i.postimg.cc/ZR4hHy3X/money-growth-logo-design-financial-growth-up-logo-design-vector-template-631577-816.jpg">
+<button id="installBtn" style="display:none;">Install App</button>
 
+<script>
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  document.getElementById('installBtn').style.display = 'block';
+
+  document.getElementById('installBtn').addEventListener('click', () => {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('App Installed');
+      }
+      deferredPrompt = null;
+    });
+  });
+});
+</script>
   <!-- Optional: Theme color for mobile browsers -->
   <meta name="theme-color" content="#ffffff">
 </head>
@@ -490,3 +512,9 @@
     chatModal.style.display = 'none';
   }
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('Service Worker Registered'));
+}
+</script>
