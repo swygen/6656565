@@ -3,102 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>এক্সচেঞ্জ এখন উপলব্ধ নয়</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+Bengali&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Noto Sans Bengali', 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #f8fbff, #e0f7fa);
-      color: #333;
-    }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .icon {
-      font-size: 72px;
-      color: #ff7043;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      color: #004d40;
-    }
-
-    p {
-      font-size: 18px;
-      color: #666;
-      max-width: 500px;
-      margin-bottom: 30px;
-    }
-
-    .status-box {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-    }
-
-    .status-box:hover {
-      transform: scale(1.02);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .footer-note {
-      font-size: 14px;
-      margin-top: 30px;
-      color: #999;
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 22px;
-      }
-
-      p {
-        font-size: 16px;
-      }
-
-      .icon {
-        font-size: 60px;
-      }
-
-      .status-box {
-        padding: 25px;
-      }
-    }
-  </style>
+  <title>INVEST SURE MONEY TRANSFER</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-  <div class="wrapper">
-    <div class="status-box">
-      <div class="icon material-icons-outlined">sync_disabled</div>
-      <h1>Exchange is Not Available</h1>
-      <p>এই ফিচারটি বর্তমানে উপলব্ধ নয়। আমরা খুব শীঘ্রই এটি চালু করার জন্য কাজ করছি। অনুগ্রহ করে পরে আবার চেষ্টা করুন।</p>
+<body class="bg-gradient-to-b from-indigo-100 to-white min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md bg-white shadow-2xl rounded-3xl overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white text-center">
+      <div class="flex items-center justify-center space-x-2 text-xl font-bold">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2S10 4.9 10 6s.9 2 2 2zm0 0v8m0 0l-3-3m3 3l3-3" />
+        </svg>
+        <span>INVEST SURE MONEY TRANSFER</span>
+      </div>
+      <p class="text-sm mt-1">Secure & Fast Transactions</p>
     </div>
-    <div class="footer-note">আপডেটেড তারিখ: <span id="date"></span></div>
+
+    <!-- Main Content -->
+    <div class="p-6 space-y-4">
+
+      <!-- Balance -->
+      <div>
+        <label class="block text-gray-700 font-semibold text-sm mb-1">Main Balance</label>
+        <input type="text" value="100 BDT" readonly class="w-full bg-gray-100 text-gray-700 text-center font-bold py-2 rounded-lg border border-gray-300 shadow-inner">
+      </div>
+
+      <!-- UID -->
+      <div>
+        <label class="block text-gray-700 font-semibold text-sm mb-1">Friend UID লিখুন</label>
+        <input id="uid" type="text" placeholder="Enter UID" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+      </div>
+
+      <!-- Amount -->
+      <div>
+        <label class="block text-gray-700 font-semibold text-sm mb-1">কত টাকা দিতে চান (১০০০ - ১০০০০)</label>
+        <input id="amount" type="number" placeholder="Enter amount" class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-indigo-400 outline-none">
+      </div>
+
+      <!-- Agreement -->
+      <div class="flex items-center space-x-2 text-sm text-gray-700">
+        <input type="checkbox" id="agree" class="rounded border-gray-300">
+        <label for="agree">I agree with Agreement</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button onclick="submitForm()" class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-2 rounded-xl font-semibold shadow-lg hover:from-indigo-600 hover:to-purple-600 transition">
+        টাকা পাঠান
+      </button>
+
+      <!-- Popup Message -->
+      <div id="popup" class="hidden p-4 mt-2 rounded-lg text-center text-white font-semibold text-sm"></div>
+
+      <!-- Rules -->
+      <div class="text-sm text-gray-500 mt-4 border-t pt-2">
+        <strong>রুলস:</strong>
+        <ul class="list-disc pl-5 mt-1">
+          <li>সর্বনিম্ন ১০০০ টাকা পাঠানো যাবে</li>
+          <li>সর্বোচ্চ ১০০০০ টাকা</li>
+          <li>ব্যালেন্স অবশ্যই থাকতে হবে</li>
+          <li> TRANSFER কৃত ব্যালেন্স পরবর্তী সময় ফেরত দেওয়া হবে না</li>
+           <li> UID সঠিকভাবে যাচাই করে নিন কোন প্রকার ভুল হলে INVEST SURE TEAM কোন ভাবেই দায়ী নয়</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <script>
-    const today = new Date();
-    document.getElementById("date").textContent = today.toLocaleDateString('bn-BD', {
-      year: 'numeric', month: 'long', day: 'numeric'
-    });
-  </script>
+    let userBalance = 100; // মূল ব্যালেন্স (ডিফল্ট ১০০)
 
+    function submitForm() {
+      const amount = parseInt(document.getElementById("amount").value);
+      const uid = document.getElementById("uid").value.trim();
+      const agree = document.getElementById("agree").checked;
+      const popup = document.getElementById("popup");
+
+      if (!uid) {
+        showPopup("⚠️ অনুগ্রহ করে UID দিন", "bg-red-500");
+        return;
+      }
+
+      if (!amount || amount < 1000 || amount > 10000) {
+        showPopup("⚠️ টাকা অবশ্যই ১০০০ থেকে ১০০০০ এর মধ্যে হতে হবে", "bg-red-500");
+        return;
+      }
+
+      if (!agree) {
+        showPopup("⚠️ অনুগ্রহ করে Agreement এ রাজি হন", "bg-red-500");
+        return;
+      }
+
+      if (amount > userBalance) {
+        showPopup("❌ There is not enough balance in your account. Please try again later.", "bg-red-600");
+        return;
+      }
+
+      userBalance -= amount;
+      showPopup(`✅ Successful Transfer Money ${amount} BDT To UID ${uid} — Received This Money 💰`, "bg-green-600");
+    }
+
+    function showPopup(message, bgClass) {
+      const popup = document.getElementById("popup");
+      popup.textContent = message;
+      popup.className = `block ${bgClass} p-4 mt-2 rounded-lg text-center text-white font-semibold`;
+    }
+  </script>
 </body>
 </html>
