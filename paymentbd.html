@@ -110,7 +110,7 @@
 
       db.ref("deposits/" + userId).push(paymentData)  
         .then(() => {  
-          alert("Your transaction ID has been successfully submitted. Please wait a moment, the verification process is in progress. Thank you.");  
+          alert("Sorry‼️, your transaction history was not found. Please submit the transaction ID after making the payment correctly. Thank you.");  
           document.getElementById("trxid").value = ""; // Clear input  
         })  
         .catch((error) => {  
