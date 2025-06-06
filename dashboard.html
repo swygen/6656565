@@ -1,3 +1,153 @@
+<!-- Google Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Eid Bonus Centered Popup -->
+<div id="eidCenterPopup" class="eid-popup-overlay">
+  <div class="eid-popup-box">
+    <!-- Close Button -->
+    <span class="material-icons eid-close" onclick="document.getElementById('eidCenterPopup').style.display='none'">close</span>
+
+    <!-- Banner Image -->
+    <img src="https://i.postimg.cc/ydVYm9zY/eid-ul-adha-post-20-1266046-57.webp" alt="Eid Banner" class="eid-banner" />
+
+    <!-- Popup Content -->
+    <div class="eid-content">
+      <span class="material-icons eid-icon">card_giftcard</span>
+      <h2>ঈদুল আযহা স্পেশাল 🎉</h2>
+      <p>Invest Sure BD থেকে ৭ দিনব্যাপী বিশাল বোনাস অফার! এখনই অংশ নিন।</p>
+      <ul class="eid-list">
+        <li><span class="material-icons">check_circle</span> সকল ডিপোজিটে বোনাস</li>
+        <li><span class="material-icons">star</span> ৳২,০০০ – ৳২০,০০০ ডিপোজিটে ৫০% বোনাস</li>
+        <li><span class="material-icons">event</span> অফার শেষ: ১৩ জুন ২০২৫</li>
+        <li><span class="material-icons">bolt</span> স্বয়ংক্রিয় বোনাস যুক্ত হচ্ছে</li>
+      </ul>
+      <a href="deposit.html" class="eid-btn">🚀 GO TO DEPOSIT</a>
+    </div>
+  </div>
+</div>
+
+<!-- Scoped CSS -->
+<style>
+/* Overlay */
+#eidCenterPopup.eid-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Popup Box */
+#eidCenterPopup .eid-popup-box {
+  background: #fff;
+  border-radius: 16px;
+  width: 95%;
+  max-width: 400px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  position: relative;
+  animation: scaleIn 0.5s ease;
+}
+
+/* Close Icon */
+#eidCenterPopup .eid-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #666;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+#eidCenterPopup .eid-close:hover {
+  color: #e53935;
+}
+
+/* Banner */
+#eidCenterPopup .eid-banner {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: auto;
+}
+
+/* Content */
+#eidCenterPopup .eid-content {
+  padding: 20px;
+  text-align: center;
+}
+#eidCenterPopup .eid-icon {
+  font-size: 30px;
+  color: #43cea2;
+}
+#eidCenterPopup h2 {
+  font-size: 20px;
+  margin: 10px 0 5px;
+  color: #222;
+}
+#eidCenterPopup p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* List */
+#eidCenterPopup .eid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px;
+  text-align: left;
+}
+#eidCenterPopup .eid-list li {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #444;
+}
+#eidCenterPopup .eid-list .material-icons {
+  color: #4caf50;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+/* Button */
+#eidCenterPopup .eid-btn {
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: background 0.3s ease;
+}
+#eidCenterPopup .eid-btn:hover {
+  background: linear-gradient(90deg, #36bfa1, #154a8d);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0 }
+  to { transform: scale(1); opacity: 1 }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  #eidCenterPopup .eid-popup-box {
+    width: 95%;
+    border-radius: 12px;
+  }
+}
+  </style>
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
