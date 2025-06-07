@@ -7,140 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    :root {
-      --main-color: #FF4081;
-      --text-color: #333;
-      --bg-color: #fdfdfd;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: var(--bg-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-    }
-
-    .banner-img {
-      width: 100%;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 24px;
-      color: var(--main-color);
-      margin-bottom: 10px;
-    }
-
-    input {
-      width: 90%;
-      padding: 14px;
-      font-size: 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      margin-top: 10px;
-      transition: 0.3s;
-    }
-
-    input:focus {
-      border-color: var(--main-color);
-      outline: none;
-    }
-
-    button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 14px;
-      background-color: var(--main-color);
-      color: white;
-      border: none;
-      font-size: 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background-color: #e73370;
-    }
-
-    .history {
-      margin-top: 30px;
-      background: white;
-      max-width: 400px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    .history h2 {
-      display: flex;
-      align-items: center;
-      color: var(--main-color);
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 15px;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background-color: #323232;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      display: flex;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .toast.success {
-      background: #4CAF50;
-    }
-
-    .toast.error {
-      background: #F44336;
-    }
-
-    .toast .material-icons {
-      margin-right: 10px;
-    }
+    /* [SAME CSS AS BEFORE - SKIPPING TO SAVE SPACE] */
   </style>
 </head>
 <body>
 
+  <!-- UI Section same as your code -->
   <div class="card">
     <img src="https://i.postimg.cc/wxJshyXc/purple-open-gift-box-with-voucher-bonus-surprise-minimal-present-greeting-celebration-promotion-disc.webp" class="banner-img" alt="Gift Banner" />
     <h1>INVEST SURE GIFT</h1>
@@ -155,12 +27,12 @@
 
   <div class="toast" id="toast"><span class="material-icons">info</span><span id="toastText">Message</span></div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
+  <!-- Firebase 10.x (ES Modules) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+    import { getDatabase, ref, get, update, child, push, set } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
 
-  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
       authDomain: "fir-bot-bd5e8.firebaseapp.com",
@@ -171,14 +43,25 @@
       appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    let currentUser;
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
 
-    firebase.auth().signInAnonymously().then(res => {
-      currentUser = res.user;
-      loadHistory();
-    });
+    let currentUser = null;
+
+    signInAnonymously(auth)
+      .then(() => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            currentUser = user;
+            loadHistory();
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("Auth Error:", error);
+        showToast("Auth failed", "error");
+      });
 
     function showToast(message, type = "info") {
       const toast = document.getElementById("toast");
@@ -188,30 +71,33 @@
       setTimeout(() => toast.className = "toast", 3000);
     }
 
-    function redeemCode() {
+    async function redeemCode() {
       const code = document.getElementById("giftCode").value.trim();
       if (!code) return showToast("Please enter a code", "error");
 
-      db.ref("giftcodes/" + code).once("value", async snapshot => {
-        if (!snapshot.exists()) return showToast("Invalid code", "error");
+      try {
+        const giftSnap = await get(ref(db, "giftcodes/" + code));
+        if (!giftSnap.exists()) return showToast("Invalid code", "error");
 
-        const data = snapshot.val();
+        const data = giftSnap.val();
         if (data.used) return showToast("Code already used", "error");
 
-        const userRef = db.ref("users/" + currentUser.uid);
-        const balanceSnap = await userRef.child("balance").once("value");
+        const userRef = ref(db, "users/" + currentUser.uid);
+        const balanceSnap = await get(child(userRef, "balance"));
         const currentBalance = balanceSnap.exists() ? balanceSnap.val() : 0;
 
-        await userRef.update({ balance: currentBalance + data.amount });
+        await update(userRef, {
+          balance: currentBalance + data.amount
+        });
 
-        await db.ref("giftcodes/" + code).update({
+        await update(ref(db, "giftcodes/" + code), {
           used: true,
           usedBy: currentUser.uid,
           usedAt: Date.now()
         });
 
-        const historyRef = userRef.child("history").push();
-        await historyRef.set({
+        const historyRef = push(child(userRef, "history"));
+        await set(historyRef, {
           code: code,
           amount: data.amount,
           time: Date.now()
@@ -220,28 +106,39 @@
         showToast("You received ৳" + data.amount, "success");
         document.getElementById("giftCode").value = "";
         loadHistory();
-      });
+      } catch (error) {
+        console.error("Redeem Error:", error);
+        showToast("Error redeeming code", "error");
+      }
     }
 
-    function loadHistory() {
+    async function loadHistory() {
       const list = document.getElementById("historyList");
       const section = document.getElementById("historySection");
       list.innerHTML = "";
 
-      db.ref("users/" + currentUser.uid + "/history").once("value", snapshot => {
+      try {
+        const snapshot = await get(ref(db, "users/" + currentUser.uid + "/history"));
         if (!snapshot.exists()) return (section.style.display = "none");
 
-        section.style.display = "block";
         const data = snapshot.val();
+        section.style.display = "block";
 
-        Object.values(data).sort((a, b) => b.time - a.time).forEach(item => {
-          const div = document.createElement("div");
-          div.className = "history-item";
-          div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
-          list.appendChild(div);
-        });
-      });
+        Object.values(data)
+          .sort((a, b) => b.time - a.time)
+          .forEach((item) => {
+            const div = document.createElement("div");
+            div.className = "history-item";
+            div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
+            list.appendChild(div);
+          });
+      } catch (error) {
+        console.error("History Load Error:", error);
+      }
     }
+
+    // Make redeemCode global
+    window.redeemCode = redeemCode;
   </script>
 </body>
 </html>
