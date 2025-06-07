@@ -1,122 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Withdraw</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
 </head>
 <body class="bg-gradient-to-br from-yellow-100 via-red-100 to-pink-100 min-h-screen p-4">
 
-<div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-5">
-  <!-- Back Button -->
-  <div class="mb-4">
-    <button onclick="window.location.href='dashboard.html'" class="text-red-600 font-semibold flex items-center">
-      <span class="material-icons-outlined mr-1">arrow_back</span> Back
-    </button>
+  <div class="max-w-md mx-auto bg-white rounded-3xl shadow-2xl p-5 relative z-10">
+    <!-- Back Button -->
+    <div class="mb-4">
+      <button onclick="window.location.href='dashboard.html'" class="text-red-600 font-semibold flex items-center">
+        <span class="material-icons-outlined mr-1">arrow_back</span> Back
+      </button>
+    </div>
+
+    <!-- Balance Display -->
+    <div class="bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl p-5 mb-5 shadow-xl">
+      <div class="text-lg font-semibold">Balance</div>
+      <div class="text-3xl font-bold" id="balanceAmount">৳0.00</div>
+    </div>
+
+    <!-- Method Selection -->
+    <div class="grid grid-cols-3 gap-3 mb-5">
+      <button onclick="selectMethod('Nagad')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+        <span class="material-icons-outlined text-red-500 text-4xl">account_balance_wallet</span>
+        <div class="mt-1 font-medium">Nagad</div>
+      </button>
+      <button onclick="selectMethod('bKash')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+        <span class="material-icons-outlined text-pink-500 text-4xl">account_balance</span>
+        <div class="mt-1 font-medium">bKash</div>
+      </button>
+      <button onclick="selectMethod('Rocket')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
+        <span class="material-icons-outlined text-purple-500 text-4xl">rocket_launch</span>
+        <div class="mt-1 font-medium">Rocket</div>
+      </button>
+    </div>
+
+    <!-- Selected Method Info -->
+    <div class="text-center text-gray-700 font-semibold mb-3">Selected Method: <span id="methodName">None</span></div>
+    <input type="hidden" id="selectedMethod" />
+
+    <!-- Withdraw Amount Input -->
+    <input type="number" id="amountInput" min="700" max="20000" placeholder="৳700 - ৳20,000" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-3" />
+
+    <!-- Withdraw Number -->
+    <input type="text" id="withdrawNumber" placeholder="Enter Account Number" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-5" />
+
+    <!-- Submit Button -->
+    <button onclick="submitWithdraw()" class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-3 rounded-xl text-lg shadow-md hover:shadow-xl">Submit</button>
   </div>
 
-  <!-- Balance Display -->
-  <div class="bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-2xl p-5 mb-5 shadow-xl">
-    <div class="text-lg font-semibold">Balance</div>
-    <div class="text-3xl font-bold" id="balanceAmount">৳0.00</div>
+  <!-- ✅ Success Overlay with Animation -->
+  <div id="successOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-3xl text-center shadow-2xl animate-fadeIn">
+      <div class="text-green-500 text-6xl mb-4 animate-bounce">✅</div>
+      <h2 class="text-xl font-bold mb-2">Withdraw Request Submitted!</h2>
+      <p class="text-gray-600 mb-4">Your request has been received successfully.</p>
+      <button onclick="window.location.href='status.html'" class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition">Check Status</button>
+    </div>
   </div>
 
-  <!-- Method Selection -->
-  <div class="grid grid-cols-3 gap-3 mb-5">
-    <button onclick="selectMethod('Nagad')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
-      <span class="material-icons-outlined text-red-500 text-4xl">account_balance_wallet</span>
-      <div class="mt-1 font-medium">Nagad</div>
-    </button>
-    <button onclick="selectMethod('bKash')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
-      <span class="material-icons-outlined text-pink-500 text-4xl">account_balance</span>
-      <div class="mt-1 font-medium">bKash</div>
-    </button>
-    <button onclick="selectMethod('Rocket')" class="bg-white rounded-2xl border shadow-lg text-center p-3 hover:shadow-xl">
-      <span class="material-icons-outlined text-purple-500 text-4xl">rocket_launch</span>
-      <div class="mt-1 font-medium">Rocket</div>
-    </button>
-  </div>
-
-  <!-- Selected Method Info -->
-  <div class="text-center text-gray-700 font-semibold mb-3">Selected Method: <span id="methodName">None</span></div>
-  <input type="hidden" id="selectedMethod" />
-
-  <!-- Withdraw Amount Input -->
-  <input type="number" id="amountInput" min="700" max="20000" placeholder="৳700 - ৳20,000" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-3" />
-
-  <!-- Withdraw Number -->
-  <input type="text" id="withdrawNumber" placeholder="Enter Account Number" class="w-full p-3 rounded-xl border text-center font-semibold text-lg mb-5" />
-
-  <!-- Submit Button -->
-  <button onclick="submitWithdraw()" class="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-3 rounded-xl text-lg shadow-md hover:shadow-xl">Submit</button>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
-    authDomain: "fir-bot-bd5e8.firebaseapp.com",
-    databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
-    projectId: "fir-bot-bd5e8",
-    storageBucket: "fir-bot-bd5e8.firebasestorage.app",
-    messagingSenderId: "501448994050",
-    appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
-    measurementId: "G-3ERPTBHN6N"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const auth = getAuth();
-
-  let currentBalance = 0;
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const balanceRef = ref(db, 'users/' + uid + '/balance');
-
-      onValue(balanceRef, (snapshot) => {
-        const balance = snapshot.val();
-        currentBalance = balance || 0;
-        document.getElementById('balanceAmount').innerText = `৳${currentBalance.toFixed(2)}`;
-      });
-    } else {
-      window.location.href = "login.html";
+  <!-- ✅ Simple fadeIn animation style -->
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
-  });
+    .animate-fadeIn {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+  </style>
 
-  window.selectMethod = function(method) {
-    document.getElementById('methodName').innerText = method;
-    document.getElementById('selectedMethod').value = method;
-  }
+  <!-- Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-  window.submitWithdraw = function() {
-    const method = document.getElementById('selectedMethod').value;
-    const amount = parseInt(document.getElementById('amountInput').value);
-    const number = document.getElementById('withdrawNumber').value.trim();
+    const firebaseConfig = {
+      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+      authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+      projectId: "fir-bot-bd5e8",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
+      messagingSenderId: "501448994050",
+      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
+      measurementId: "G-3ERPTBHN6N"
+    };
 
-    if (!method || !amount || !number) {
-      return alert('Please fill in all fields');
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const auth = getAuth();
+
+    let currentBalance = 0;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const balanceRef = ref(db, 'users/' + uid + '/balance');
+
+        onValue(balanceRef, (snapshot) => {
+          const balance = snapshot.val();
+          currentBalance = balance || 0;
+          document.getElementById('balanceAmount').innerText = `৳${currentBalance.toFixed(2)}`;
+        });
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+
+    // Method selection function
+    window.selectMethod = function(method) {
+      document.getElementById('methodName').innerText = method;
+      document.getElementById('selectedMethod').value = method;
     }
 
-    if (amount < 700 || amount > 20000) {
-      return alert('Withdraw amount must be between ৳700 and ৳20,000');
-    }
+    // Submit withdraw function
+    window.submitWithdraw = function() {
+      const method = document.getElementById('selectedMethod').value;
+      const amount = parseInt(document.getElementById('amountInput').value);
+      const number = document.getElementById('withdrawNumber').value.trim();
 
-    if (amount > currentBalance) {
-      return alert('Insufficient balance');
-    }
+      if (!method || !amount || !number) {
+        return alert('Please fill in all fields');
+      }
 
-    alert(`✅ Withdraw request submitted!\n\nMethod: ${method}\nAmount: ৳${amount}\nNumber: ${number}`);
-    
-    // Optional: save to Firebase or redirect
-    // window.location.href = 'success.html';
-  }
-</script>
+      if (amount < 700 || amount > 20000) {
+        return alert('Withdraw amount must be between ৳700 and ৳20,000');
+      }
+
+      if (amount > currentBalance) {
+        return alert('Insufficient balance');
+      }
+
+      // Show success overlay
+      document.getElementById('successOverlay').classList.remove('hidden');
+
+      // Optional: Save to Firebase or server logic
+    }
+  </script>
 </body>
 </html>
