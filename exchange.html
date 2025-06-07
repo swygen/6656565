@@ -2,250 +2,199 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>INVEST SURE GIFT 🎁</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>INVEST SURE GIFT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    :root {
-      --main-color: #FF4081;
-      --text-color: #333;
-      --bg-color: #fdfdfd;
-    }
-
     body {
       font-family: 'Roboto', sans-serif;
-      background: var(--bg-color);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      justify-content: center;
+      padding: 30px;
+      background: #f2f2f2;
     }
-
     .card {
-      background: white;
+      background: #fff;
       padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
       max-width: 400px;
-      width: 100%;
-      text-align: center;
-      position: relative;
     }
-
-    .banner-img {
-      width: 100%;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
-
     h1 {
-      font-size: 24px;
-      color: var(--main-color);
-      margin-bottom: 10px;
+      color: #ff4081;
+      font-size: 22px;
+      margin-bottom: 20px;
+      text-align: center;
     }
-
     input {
-      width: 90%;
-      padding: 14px;
-      font-size: 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      margin-top: 10px;
-      transition: 0.3s;
-    }
-
-    input:focus {
-      border-color: var(--main-color);
-      outline: none;
-    }
-
-    button {
-      margin-top: 15px;
       width: 100%;
-      padding: 14px;
-      background-color: var(--main-color);
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff4081;
       color: white;
       border: none;
       font-size: 16px;
-      border-radius: 12px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
     }
-
     button:hover {
-      background-color: #e73370;
+      background-color: #e91e63;
     }
-
-    .history {
-      margin-top: 30px;
-      background: white;
-      max-width: 400px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    .history h2 {
-      display: flex;
-      align-items: center;
-      color: var(--main-color);
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 15px;
-    }
-
     .toast {
       position: fixed;
       top: 20px;
       right: 20px;
-      background-color: #323232;
-      color: white;
+      background: #323232;
+      color: #fff;
       padding: 12px 18px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      border-radius: 6px;
       opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      display: flex;
-      align-items: center;
-      z-index: 9999;
+      transition: 0.4s ease;
     }
-
     .toast.show {
       opacity: 1;
-      transform: translateY(0);
     }
-
-    .toast.success {
-      background: #4CAF50;
+    .history {
+      margin-top: 20px;
     }
-
-    .toast.error {
-      background: #F44336;
-    }
-
-    .toast .material-icons {
-      margin-right: 10px;
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <img src="https://i.postimg.cc/wxJshyXc/purple-open-gift-box-with-voucher-bonus-surprise-minimal-present-greeting-celebration-promotion-disc.webp" class="banner-img" alt="Gift Banner" />
-    <h1>INVEST SURE GIFT</h1>
-    <input type="text" id="giftCode" placeholder="Enter gift code" />
-    <button onclick="redeemCode()">🎁 Receive</button>
-  </div>
+<div class="card">
+  <h1>INVEST SURE GIFT</h1>
+  <input type="text" id="giftCode" placeholder="Enter your gift code">
+  <button onclick="redeemCode()">🎁 Redeem</button>
 
   <div class="history" id="historySection" style="display:none;">
-    <h2><span class="material-icons">history</span>Gift History</h2>
+    <h3>History</h3>
     <div id="historyList"></div>
   </div>
+</div>
 
-  <div class="toast" id="toast"><span class="material-icons">info</span><span id="toastText">Message</span></div>
+<div class="toast" id="toast">This is a toast</div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
-      authDomain: "fir-bot-bd5e8.firebaseapp.com",
-      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
-      projectId: "fir-bot-bd5e8",
-      storageBucket: "fir-bot-bd5e8.appspot.com",
-      messagingSenderId: "501448994050",
-      appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
-    };
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
+    authDomain: "fir-bot-bd5e8.firebaseapp.com",
+    databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
+    projectId: "fir-bot-bd5e8",
+    storageBucket: "fir-bot-bd5e8.appspot.com",
+    messagingSenderId: "501448994050",
+    appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    let currentUser = null;
+  let currentUser = null;
 
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        currentUser = user;
-        loadHistory();
-      } else {
-        // Redirect to login page if not authenticated
-        window.location.href = "login.html";
-      }
-    });
-
-    function showToast(message, type = "info") {
-      const toast = document.getElementById("toast");
-      const toastText = document.getElementById("toastText");
-      toastText.textContent = message;
-      toast.className = `toast show ${type}`;
-      setTimeout(() => toast.className = "toast", 3000);
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      currentUser = user;
+      loadHistory();
+    } else {
+      window.location.href = "login.html"; // redirect if not logged in
     }
+  });
 
-    function redeemCode() {
-      const code = document.getElementById("giftCode").value.trim();
-      if (!code) return showToast("Please enter a code", "error");
+  function showToast(msg, duration = 3000) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), duration);
+  }
 
-      db.ref("giftcodes/" + code).once("value", async snapshot => {
-        if (!snapshot.exists()) return showToast("Invalid code", "error");
+  function redeemCode() {
+    const code = document.getElementById("giftCode").value.trim();
+    if (!code) return showToast("Please enter a gift code");
 
-        const data = snapshot.val();
-        if (data.used) return showToast("Code already used", "error");
+    const giftRef = db.ref("giftcodes/" + code);
+    giftRef.once("value").then(snapshot => {
+      if (!snapshot.exists()) {
+        showToast("Invalid gift code");
+        return;
+      }
 
-        const userRef = db.ref("users/" + currentUser.uid);
-        const balanceSnap = await userRef.child("balance").once("value");
+      const data = snapshot.val();
+      if (data.used) {
+        showToast("This code has already been used");
+        return;
+      }
+
+      const userRef = db.ref("users/" + currentUser.uid);
+      userRef.child("balance").once("value").then(balanceSnap => {
         const currentBalance = balanceSnap.exists() ? balanceSnap.val() : 0;
+        const newBalance = currentBalance + data.amount;
 
-        await userRef.update({ balance: currentBalance + data.amount });
+        userRef.update({ balance: newBalance });
 
-        await db.ref("giftcodes/" + code).update({
+        giftRef.update({
           used: true,
           usedBy: currentUser.uid,
           usedAt: Date.now()
         });
 
-        const historyRef = userRef.child("history").push();
-        await historyRef.set({
+        const historyItem = {
           code: code,
           amount: data.amount,
           time: Date.now()
-        });
+        };
 
-        showToast("You received ৳" + data.amount, "success");
+        userRef.child("history").push(historyItem);
+
+        showToast(`Received ৳${data.amount} successfully`);
         document.getElementById("giftCode").value = "";
         loadHistory();
       });
-    }
+    });
+  }
 
-    function loadHistory() {
-      const list = document.getElementById("historyList");
-      const section = document.getElementById("historySection");
-      list.innerHTML = "";
+  function loadHistory() {
+    const list = document.getElementById("historyList");
+    const section = document.getElementById("historySection");
+    list.innerHTML = "";
 
-      db.ref("users/" + currentUser.uid + "/history").once("value", snapshot => {
-        if (!snapshot.exists()) return (section.style.display = "none");
+    db.ref("users/" + currentUser.uid + "/history").once("value", snapshot => {
+      if (!snapshot.exists()) {
+        section.style.display = "none";
+        return;
+      }
 
-        section.style.display = "block";
-        const data = snapshot.val();
+      section.style.display = "block";
+      const data = snapshot.val();
+      const items = Object.values(data).sort((a, b) => b.time - a.time);
 
-        Object.values(data).sort((a, b) => b.time - a.time).forEach(item => {
-          const div = document.createElement("div");
-          div.className = "history-item";
-          div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
-          list.appendChild(div);
-        });
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+        div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
+        list.appendChild(div);
       });
-    }
-  </script>
+    });
+  }
+</script>
 </body>
 </html>
