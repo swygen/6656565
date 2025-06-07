@@ -103,7 +103,6 @@
       font-size: 15px;
     }
 
-    /* Toast Notification */
     .toast {
       position: fixed;
       top: 20px;
@@ -141,12 +140,11 @@
 </head>
 <body>
 
-  <!-- UI Section same as your code -->
   <div class="card">
     <img src="https://i.postimg.cc/wxJshyXc/purple-open-gift-box-with-voucher-bonus-surprise-minimal-present-greeting-celebration-promotion-disc.webp" class="banner-img" alt="Gift Banner" />
     <h1>INVEST SURE GIFT</h1>
     <input type="text" id="giftCode" placeholder="Enter gift code" />
-    <button onclick="redeemCode()">Receive</button>
+    <button onclick="redeemCode()">🎁 Receive</button>
   </div>
 
   <div class="history" id="historySection" style="display:none;">
@@ -156,12 +154,12 @@
 
   <div class="toast" id="toast"><span class="material-icons">info</span><span id="toastText">Message</span></div>
 
-  <!-- Firebase 10.x (ES Modules) -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-    import { getDatabase, ref, get, update, child, push, set } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js";
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
 
+  <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
       authDomain: "fir-bot-bd5e8.firebaseapp.com",
@@ -172,25 +170,19 @@
       appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const auth = getAuth();
-
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
     let currentUser = null;
 
-    signInAnonymously(auth)
-      .then(() => {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            currentUser = user;
-            loadHistory();
-          }
-        });
-      })
-      .catch((error) => {
-        console.error("Auth Error:", error);
-        showToast("Auth failed", "error");
-      });
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        currentUser = user;
+        loadHistory();
+      } else {
+        // Redirect to login page if not authenticated
+        window.location.href = "login.html";
+      }
+    });
 
     function showToast(message, type = "info") {
       const toast = document.getElementById("toast");
@@ -200,33 +192,30 @@
       setTimeout(() => toast.className = "toast", 3000);
     }
 
-    async function redeemCode() {
+    function redeemCode() {
       const code = document.getElementById("giftCode").value.trim();
       if (!code) return showToast("Please enter a code", "error");
 
-      try {
-        const giftSnap = await get(ref(db, "giftcodes/" + code));
-        if (!giftSnap.exists()) return showToast("Invalid code", "error");
+      db.ref("giftcodes/" + code).once("value", async snapshot => {
+        if (!snapshot.exists()) return showToast("Invalid code", "error");
 
-        const data = giftSnap.val();
+        const data = snapshot.val();
         if (data.used) return showToast("Code already used", "error");
 
-        const userRef = ref(db, "users/" + currentUser.uid);
-        const balanceSnap = await get(child(userRef, "balance"));
+        const userRef = db.ref("users/" + currentUser.uid);
+        const balanceSnap = await userRef.child("balance").once("value");
         const currentBalance = balanceSnap.exists() ? balanceSnap.val() : 0;
 
-        await update(userRef, {
-          balance: currentBalance + data.amount
-        });
+        await userRef.update({ balance: currentBalance + data.amount });
 
-        await update(ref(db, "giftcodes/" + code), {
+        await db.ref("giftcodes/" + code).update({
           used: true,
           usedBy: currentUser.uid,
           usedAt: Date.now()
         });
 
-        const historyRef = push(child(userRef, "history"));
-        await set(historyRef, {
+        const historyRef = userRef.child("history").push();
+        await historyRef.set({
           code: code,
           amount: data.amount,
           time: Date.now()
@@ -235,39 +224,28 @@
         showToast("You received ৳" + data.amount, "success");
         document.getElementById("giftCode").value = "";
         loadHistory();
-      } catch (error) {
-        console.error("Redeem Error:", error);
-        showToast("Error redeeming code", "error");
-      }
+      });
     }
 
-    async function loadHistory() {
+    function loadHistory() {
       const list = document.getElementById("historyList");
       const section = document.getElementById("historySection");
       list.innerHTML = "";
 
-      try {
-        const snapshot = await get(ref(db, "users/" + currentUser.uid + "/history"));
+      db.ref("users/" + currentUser.uid + "/history").once("value", snapshot => {
         if (!snapshot.exists()) return (section.style.display = "none");
 
-        const data = snapshot.val();
         section.style.display = "block";
+        const data = snapshot.val();
 
-        Object.values(data)
-          .sort((a, b) => b.time - a.time)
-          .forEach((item) => {
-            const div = document.createElement("div");
-            div.className = "history-item";
-            div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
-            list.appendChild(div);
-          });
-      } catch (error) {
-        console.error("History Load Error:", error);
-      }
+        Object.values(data).sort((a, b) => b.time - a.time).forEach(item => {
+          const div = document.createElement("div");
+          div.className = "history-item";
+          div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
+          list.appendChild(div);
+        });
+      });
     }
-
-    // Make redeemCode global
-    window.redeemCode = redeemCode;
   </script>
 </body>
 </html>
