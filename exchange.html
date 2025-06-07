@@ -1,102 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>INVEST SURE GIFT</title>
+  <title>Gift Redeem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      display: flex;
-      justify-content: center;
-      padding: 30px;
-      background: #f2f2f2;
-    }
-    .card {
-      background: #fff;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-    h1 {
-      color: #ff4081;
-      font-size: 22px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #ff4081;
-      color: white;
-      border: none;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #e91e63;
-    }
-    .toast {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #323232;
-      color: #fff;
-      padding: 12px 18px;
-      border-radius: 6px;
-      opacity: 0;
-      transition: 0.4s ease;
-    }
-    .toast.show {
-      opacity: 1;
-    }
-    .history {
-      margin-top: 20px;
-    }
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      padding: 6px 0;
-      border-bottom: 1px solid #eee;
-    }
+    body { font-family: sans-serif; padding: 30px; background: #f9f9f9; }
+    .card { background: white; padding: 20px; border-radius: 10px; max-width: 400px; margin: auto; }
+    input, button { width: 100%; padding: 12px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc; }
+    button { background: #4CAF50; color: white; font-weight: bold; border: none; }
+    .toast { color: red; text-align: center; margin-top: 10px; }
+    .history-item { display: flex; justify-content: space-between; font-size: 14px; border-bottom: 1px solid #eee; padding: 5px 0; }
   </style>
 </head>
 <body>
 
 <div class="card">
-  <h1>INVEST SURE GIFT</h1>
-  <input type="text" id="giftCode" placeholder="Enter your gift code">
-  <button onclick="redeemCode()">🎁 Redeem</button>
+  <h2>INVEST SURE GIFT 🎁</h2>
+  <input type="text" id="giftCode" placeholder="Enter Gift Code">
+  <button onclick="redeemCode()">Redeem</button>
+  <div class="toast" id="toast"></div>
 
-  <div class="history" id="historySection" style="display:none;">
-    <h3>History</h3>
+  <div id="history" style="margin-top:20px; display:none;">
+    <h4>Gift History</h4>
     <div id="historyList"></div>
   </div>
 </div>
 
-<div class="toast" id="toast">This is a toast</div>
-
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js"></script>
 
 <script>
-  // Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
     authDomain: "fir-bot-bd5e8.firebaseapp.com",
@@ -106,66 +40,51 @@
     messagingSenderId: "501448994050",
     appId: "1:501448994050:web:fb1c102dcaeb23bf93261b"
   };
+
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  let currentUser = null;
+  let currentUser;
 
   firebase.auth().onAuthStateChanged(user => {
-    if (user) {
+    if (!user) {
+      window.location.href = "login.html";
+    } else {
       currentUser = user;
       loadHistory();
-    } else {
-      window.location.href = "login.html"; // redirect if not logged in
     }
   });
 
-  function showToast(msg, duration = 3000) {
-    const toast = document.getElementById("toast");
-    toast.textContent = msg;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), duration);
+  function showToast(msg) {
+    document.getElementById("toast").innerText = msg;
+    setTimeout(() => document.getElementById("toast").innerText = "", 3000);
   }
 
   function redeemCode() {
     const code = document.getElementById("giftCode").value.trim();
-    if (!code) return showToast("Please enter a gift code");
+    if (!code) return showToast("Enter a code");
 
-    const giftRef = db.ref("giftcodes/" + code);
-    giftRef.once("value").then(snapshot => {
-      if (!snapshot.exists()) {
-        showToast("Invalid gift code");
-        return;
-      }
+    const codeRef = db.ref("giftcodes/" + code);
+    codeRef.once("value").then(snapshot => {
+      if (!snapshot.exists()) return showToast("Invalid code");
 
       const data = snapshot.val();
-      if (data.used) {
-        showToast("This code has already been used");
-        return;
-      }
+      if (data.used) return showToast("Already used");
 
       const userRef = db.ref("users/" + currentUser.uid);
-      userRef.child("balance").once("value").then(balanceSnap => {
-        const currentBalance = balanceSnap.exists() ? balanceSnap.val() : 0;
-        const newBalance = currentBalance + data.amount;
+      userRef.child("balance").once("value").then(balSnap => {
+        const balance = balSnap.exists() ? balSnap.val() : 0;
+        userRef.update({ balance: balance + data.amount });
 
-        userRef.update({ balance: newBalance });
+        codeRef.update({ used: true, usedBy: currentUser.uid, usedAt: Date.now() });
 
-        giftRef.update({
-          used: true,
-          usedBy: currentUser.uid,
-          usedAt: Date.now()
-        });
-
-        const historyItem = {
+        userRef.child("history").push({
           code: code,
           amount: data.amount,
           time: Date.now()
-        };
+        });
 
-        userRef.child("history").push(historyItem);
-
-        showToast(`Received ৳${data.amount} successfully`);
+        showToast("You received ৳" + data.amount);
         document.getElementById("giftCode").value = "";
         loadHistory();
       });
@@ -174,7 +93,7 @@
 
   function loadHistory() {
     const list = document.getElementById("historyList");
-    const section = document.getElementById("historySection");
+    const section = document.getElementById("history");
     list.innerHTML = "";
 
     db.ref("users/" + currentUser.uid + "/history").once("value", snapshot => {
@@ -185,9 +104,7 @@
 
       section.style.display = "block";
       const data = snapshot.val();
-      const items = Object.values(data).sort((a, b) => b.time - a.time);
-
-      items.forEach(item => {
+      Object.values(data).sort((a, b) => b.time - a.time).forEach(item => {
         const div = document.createElement("div");
         div.className = "history-item";
         div.innerHTML = `<span>${item.code}</span><span>৳${item.amount}</span>`;
