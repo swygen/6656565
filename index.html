@@ -2,32 +2,188 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>InvestSure BD - আপনার আয় এর এক অনন্য সুযোগ </title>
-  <!-- Standard favicon -->
-  <link rel="icon" type="image/jpeg" sizes="32x32" href="https://i.postimg.cc/ZR4hHy3X/money-growth-logo-design-financial-growth-up-logo-design-vector-template-631577-816.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InvestSure BD - Premium Auth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Apple Touch Icon for iOS -->
-  <link rel="apple-touch-icon" href="https://i.postimg.cc/ZR4hHy3X/money-growth-logo-design-financial-growth-up-logo-design-vector-template-631577-816.jpg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-  <!-- Android Chrome -->
-  <link rel="icon" sizes="192x192" href="https://i.postimg.cc/ZR4hHy3X/money-growth-logo-design-financial-growth-up-logo-design-vector-template-631577-816.jpg">
+    body {
+      background-color: #00C853;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 20px;
+    }
 
-  <!-- Optional: Theme color for mobile browsers -->
-  <meta name="theme-color" content="#ffffff">
-   <link rel="manifest" href="/manifest.json" />
-  <button id="installBtn" style="display: none;">Install App</button>
+    .container {
+      background-color: #fff;
+      color: #333;
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 200px;
+      height: 200px;
+      margin-right: 10px;
+    }
+
+    .logo span {
+      font-weight: 600;
+      font-size: 22px;
+      color: #00C853;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #00C853;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+      background: #f5f5f5;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+
+    .input-group .material-icons {
+      margin-right: 10px;
+      color: #00C853;
+    }
+
+    .input-group input {
+      border: none;
+      background: transparent;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .referral-note {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #00C853;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #c2185b;
+    }
+
+    .google-btn {
+      background: #00E676;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .toggle-link {
+      display: inline-block;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #00C853;
+      cursor: pointer;
+    }
+
+    .toggle-link:hover {
+      font-weight: 500;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media(max-width: 480px) {
+      .container {
+        padding: 20px 15px;
+      }
+    }
+  </style>
 </head>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://i.postimg.cc/MGvTHFhR/20250609-193748.png" alt="Logo" />
+    </div>
+
+    <div id="signupForm">
+      <h2>Create Account</h2>
+      <div class="input-group"><span class="material-icons">person</span><input type="text" id="signupName" placeholder="Full Name" required /></div>
+      <div class="input-group"><span class="material-icons">email</span><input type="email" id="signupEmail" placeholder="Email" required /></div>
+      <div class="input-group"><span class="material-icons">phone</span><input type="tel" id="signupPhone" placeholder="Phone Number" required /></div>
+      <input type="hidden" id="signupReferral" value="2581463978" />
+      <div class="referral-note">Referral Code:  Z2486244</div>
+      <div class="input-group"><span class="material-icons">lock</span><input type="password" id="signupPassword" placeholder="Password" required /></div>
+      <div class="input-group"><span class="material-icons">lock_open</span><input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required /></div>
+      <button onclick="signup()">Sign Up</button>
+      <button class="google-btn" onclick="googleSignup()">
+        <span class="material-icons">account_circle</span> Sign up with Google
+      </button>
+      <div class="toggle-link" onclick="toggleForms()">Already have an account? Login</div>
+    </div>
+
+    <div id="loginForm" class="hidden">
+      <h2>Welcome Back</h2>
+      <div class="input-group"><span class="material-icons">email</span><input type="email" id="loginEmail" placeholder="Email" required /></div>
+      <div class="input-group"><span class="material-icons">lock</span><input type="password" id="loginPassword" placeholder="Password" required /></div>
+      <button onclick="login()">Login</button>
+      <div class="toggle-link" onclick="toggleForms()">Don't have an account? Sign Up</div><br />
+      <a class="toggle-link" style="display:block; margin-top:10px;" href="forget.html">Forgot Password?</a>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import {
+      getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile,
+      GoogleAuthProvider, signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyCwiUR6oJRjTBFa2ajTdb-5Owc_I6Dw2S0",
       authDomain: "fir-bot-bd5e8.firebaseapp.com",
+      databaseURL: "https://fir-bot-bd5e8-default-rtdb.firebaseio.com",
       projectId: "fir-bot-bd5e8",
-      storageBucket: "fir-bot-bd5e8.appspot.com",
+      storageBucket: "fir-bot-bd5e8.firebasestorage.app",
       messagingSenderId: "501448994050",
       appId: "1:501448994050:web:fb1c102dcaeb23bf93261b",
       measurementId: "G-3ERPTBHN6N"
@@ -35,6 +191,8 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth();
+    const db = getDatabase();
+    const provider = new GoogleAuthProvider();
 
     window.signup = () => {
       const name = document.getElementById("signupName").value;
@@ -51,8 +209,18 @@
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          updateProfile(userCredential.user, { displayName: name });
-          alert("Signup successful! Please login.");
+          const user = userCredential.user;
+          updateProfile(user, { displayName: name });
+
+          set(ref(db, 'users/' + user.uid), {
+            name: name,
+            email: email,
+            phone: phone,
+            referral: referral,
+            uid: user.uid
+          });
+
+          alert(`Signup successful! Referral: ${referral}`);
           toggleForms();
         })
         .catch(error => alert(error.message));
@@ -67,215 +235,31 @@
         .catch(error => alert("Login failed: " + error.message));
     };
 
-    window.forgotPassword = () => {
-      const email = prompt("Enter your email to reset password:");
-      if (email) {
-        sendPasswordResetEmail(auth, email)
-          .then(() => alert("Password reset email sent!"))
-          .catch(error => alert(error.message));
-      }
+    window.googleSignup = () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+
+          set(ref(db, 'users/' + user.uid), {
+            name: user.displayName,
+            email: user.email,
+            phone: user.phoneNumber || '',
+            referral: "GoogleSignUp",
+            uid: user.uid
+          });
+
+          alert("Google Sign-up successful!");
+          window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+          alert("Google Sign-up failed: " + error.message);
+        });
     };
-    import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    
-    const provider = new GoogleAuthProvider();
-    
-    window.googleSignIn = () => {
-    signInWithPopup(auth, provider)
-    .then((result) => {
-    const user = result.user;
-    alert("Google Sign-In Successful!");
-    window.location.href = "dashboard.html";
-    })
-    .catch((error) => {
-    alert("Google Sign-In Failed: " + error.message);
-    });
-    };
-    import { setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    
-    setPersistence(auth, browserLocalPersistence)
-    .then(() => {
-    console.log("Persistence set to local.");
-    })
-    .catch((error) => {
-    console.error("Failed to set persistence:", error);
-    });
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-    
-    onAuthStateChanged(auth, (user) => {
-    if (user) {
-    window.location.href = "dashboard.html";
-    }
-    });
 
-    // Auto-fill referral from URL
-    window.addEventListener("DOMContentLoaded", () => {
-      const params = new URLSearchParams(window.location.search);
-      const ref = params.get("ref");
-      if (ref) document.getElementById("signupReferral").value = ref;
-    });
-  </script>
-
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .container {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.1);
-      width: 100%;
-      max-width: 420px;
-      backdrop-filter: blur(15px);
-      color: #ffffff;
-      text-align: center;
-    }
-    dotlottie-player {
-      margin-bottom: 20px;
-    }
-    h2 {
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-    p {
-      font-size: 14px;
-      color: #aaa;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      background: linear-gradient(145deg, #1f1f1f, #292929);
-      color: #fff;
-      transition: 0.3s ease;
-    }
-    input:focus {
-      outline: none;
-      border-color: #00ffd5;
-      background: linear-gradient(145deg, #292929, #1f1f1f);
-      box-shadow: 0 0 8px #00ffd5;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(to right, #00ffd5, #00bfa5);
-      color: black;
-      font-weight: 600;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.4s ease;
-      margin-top: 12px;
-    }
-    button:hover {
-      background: black;
-      color: white;
-      border: 1px solid #00ffd5;
-    }
-    .toggle-link {
-      display: inline-block;
-      margin-top: 15px;
-      font-size: 13px;
-      color: #bbb;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
-    .toggle-link:hover {
-      color: #00ffd5;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    
-
-    <div id="signupForm">
-      <h2>Create Account <strong>InvestSure BD</strong></h2>
-      <p>Signup to get started</p>
-      <button onclick="googleSignIn()" style="background: #fff; color: #000; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
-      <img src="https://i.postimg.cc/9Fjpg0tr/google-symbol.png" alt="Google logo" style="width: 20px; height: 20px;">
-      Sign in with Google
-      </button>
-      <input type="text" id="signupName" placeholder="Full Name" required>
-      <input type="email" id="signupEmail" placeholder="Email" required>
-      <input type="tel" id="signupPhone" placeholder="Phone Number" required>
-      <input type="text" id="signupReferral" placeholder="Referral Code (Optional)">
-      <input type="password" id="signupPassword" placeholder="Password" required>
-      <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
-      <button onclick="signup()">Signup</button>
-      <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
-    </div>
-
-    <div id="loginForm" class="hidden">
-      <h2>Welcome Back <strong>InvestSure BD</strong></h2>
-      <p>Login to your account</p>
-      <button onclick="googleSignIn()" style="background: #fff; color: #000; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;">
-      <img src="https://i.postimg.cc/9Fjpg0tr/google-symbol.png" alt="Google logo" style="width: 20px; height: 20px;">
-      Sign in with Google
-      </button>
-      <input type="email" id="loginEmail" placeholder="Email" required>
-      <input type="password" id="loginPassword" placeholder="Password" required>
-      <button onclick="login()">Login</button>
-      <span class="toggle-link" onclick="toggleForms()">Don't have an account? Signup</span><br>
-      <span class="toggle-link" onclick="forgotPassword()">Forgot Password?</span>
-    </div>
-  </div>
-
-  <script>
-  
-    function toggleForms() {
+    window.toggleForms = () => {
       document.getElementById("signupForm").classList.toggle("hidden");
       document.getElementById("loginForm").classList.toggle("hidden");
-    }
-    
-  </script>
-  <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const refCode = urlParams.get('ref');
-  if (refCode) {
-    document.getElementById("referralField").value = refCode;
-  }
-    let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      console.log('User accepted the install prompt');
-    } else {
-      console.log('User dismissed the install prompt');
-    }
-    deferredPrompt = null;
-    installBtn.style.display = 'none';
-  }
-});
-    // index.js or main.js
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-}
+    };
   </script>
 </body>
 </html>
