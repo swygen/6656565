@@ -1,60 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Balance Warning</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Google Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>InvestSure - Maintenance Notice</title>
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a2d9d6f95c.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
-      color: white;
+    :root {
+      --primary: #0d1b2a;
+      --accent: #ff9900;
+      --glass-bg: rgba(255, 255, 255, 0.07);
+      --text-light: #f2f2f2;
     }
 
-    .card-glass {
-      backdrop-filter: blur(16px);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: var(--primary);
+      color: var(--text-light);
+    }
+
+    .hero {
+      height: 45vh;
+      background: url('https://i.postimg.cc/vHbgXxwr/computer-troubleshooting-concept-illustration-114360-7496.webp') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(13, 27, 42, 0.9));
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px 20px;
+      text-align: center;
+      animation: fadeIn 1.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .message-box p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #ddd;
+      margin-bottom: 12px;
+    }
+
+    .countdown {
+      margin: 25px 0;
+      font-size: 1.3rem;
+      font-weight: bold;
+      background: rgba(255,255,255,0.1);
+      padding: 12px 25px;
+      border-radius: 15px;
+      display: inline-block;
+      color: #ffeb3b;
+      box-shadow: inset 0 0 10px rgba(255,255,255,0.15);
+    }
+
+    .btn-dashboard {
+      margin-top: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-dashboard:hover {
+      background: #e88e00;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.4rem; }
+      .message-box { padding: 20px; }
+      .countdown { font-size: 1.1rem; }
     }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center px-4 py-10">
+<body>
 
-  <div class="card-glass max-w-md w-full rounded-2xl p-6 text-center space-y-6">
-    
-    <div class="flex justify-center">
-      <img src="https://assets.onecompiler.app/43ea4pg72/43emcb542/attention.gif" alt="Attention" class="w-40 h-40 rounded-xl shadow-xl border border-white/20" />
-    </div>
-
-    <div class="text-2xl font-bold text-yellow-300 flex items-center justify-center gap-2">
-      <span class="material-icons-outlined text-yellow-400 text-3xl">error_outline</span>
-      Attention Required
-    </div>
-
-    <p class="text-sm text-gray-200 leading-relaxed px-3">
-      <span class="text-yellow-300 font-medium">Attention:</span> Your balance is <span class="text-red-400 font-medium">unfinished</span>.<br>
-      Please deposit your account first to buy any project.<br>
-      <span class="text-green-300 font-medium">Thank you</span> for understanding!
-    </p>
-
-    <a href="deposit.html">
-      <button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-full shadow-lg transition-all duration-300">
-        Deposit Now
-      </button>
-    </a>
-
+  <div class="hero">
+    <div class="overlay"></div>
+    <h1><span class="material-icons-outlined">error_outline</span> INVEST SURE PACKAGE NOTICE</h1>
   </div>
+
+  <div class="container">
+    <div class="message-box">
+      <p><strong><i class="fas fa-tools"></i> সন্মানিত গ্রাহক,</strong></p>
+      <p>আমরা দুঃখিত! বর্তমানে প্রযুক্তিগত সমস্যার কারণে আপনি প্যাকেজ ক্রয় করতে পারছেন না। আমাদের টেকনিক্যাল টিম এই সমস্যার সমাধানে নিরলস কাজ করে যাচ্ছে।</p>
+      <p>অনুগ্রহ করে ধৈর্য ধরুন এবং আমাদের সার্ভিসটি উপভোগ করুন। খুব দ্রুতই সমস্যা সমাধান হবে ইনশাআল্লাহ।</p>
+    </div>
+
+    <div class="countdown" id="countdown">লোড হচ্ছে...</div>
+
+    <a href="dashboard.html" class="btn-dashboard">
+      <i class="fas fa-arrow-right"></i> Go To Dashboard
+    </a>
+  </div>
+
+<script>
+  // ১. নির্দিষ্টভাবে আগামীকাল ১৩ জুন ২০২৫, দুপুর ২:৪০ PM সময় বসানো
+  const target = new Date("2025-06-13T14:40:00"); // YYYY-MM-DDTHH:MM:SS
+
+  function updateCountdown() {
+    const now = new Date();
+    const difference = target - now;
+
+    if (difference <= 0) {
+      document.getElementById("countdown").innerHTML =
+        "✅ সমস্যার সমাধান হয়ে গেছে!";
+      return;
+    }
+
+    const hours = Math.floor(difference / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      `⏳ সমাধান হতে বাকি: ${hours} ঘণ্টা : ${minutes} মিনিট : ${seconds} সেকেন্ড`;
+  }
+
+  setInterval(updateCountdown, 1000);
+</script>
 
 </body>
 </html>
